@@ -10,8 +10,13 @@ categories:
 - Courses
 ---
 
-本节目标，什么是计算机组成，什么是计算机架构。
+Week 1 of 2020 Spring. An Introduction to Computer Composition.
 
+**Keywords**: 计算机组成，计算机架构
+
+<!--more-->
+
+[toc]
 
 ## Programs
 

@@ -16,6 +16,11 @@ categories:
 
 ---
 
+Week 1 of 2020 Spring. An Introduction to Software Engineering
+
+**Keywords**: Software, Software Engineering, Modeling
+
+<!--more-->
 
 [TOC]
 
