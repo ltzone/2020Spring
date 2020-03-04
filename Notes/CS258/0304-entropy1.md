@@ -12,7 +12,7 @@ categories:
 
 Week 1 of 2020 Spring. Entropy
 
-**KeyWords**: Entropy, Relative entropy, Information Inequality
+**KeyWords**: Entropy, Joint Entropy, Conditional Entropy
 
 <!--more-->
 
