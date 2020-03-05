@@ -5,3 +5,8 @@
 *.flm
 *.fdb_latexmk
 *.fls
+*.aux
+*.glob
+*.vo
+*.vok
+*.vos

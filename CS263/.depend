@@ -1,0 +1,10 @@
+Imp.vo Imp.glob Imp.v.beautified Imp.required_vo: Imp.v 
+Imp.vio: Imp.v 
+Introduction.vo Introduction.glob Introduction.v.beautified Introduction.required_vo: Introduction.v 
+Introduction.vio: Introduction.v 
+Hoare_Logic_1.vo Hoare_Logic_1.glob Hoare_Logic_1.v.beautified Hoare_Logic_1.required_vo: Hoare_Logic_1.v Imp.vo
+Hoare_Logic_1.vio: Hoare_Logic_1.v Imp.vio
+Hoare_Logic_2.vo Hoare_Logic_2.glob Hoare_Logic_2.v.beautified Hoare_Logic_2.required_vo: Hoare_Logic_2.v Imp.vo
+Hoare_Logic_2.vio: Hoare_Logic_2.v Imp.vio
+Assignment1.vo Assignment1.glob Assignment1.v.beautified Assignment1.required_vo: Assignment1.v Imp.vo
+Assignment1.vio: Assignment1.v Imp.vio

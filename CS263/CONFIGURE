@@ -1,0 +1,3 @@
+CURRENT_DIR=.
+COQC= "/mnt/c/Coq/bin/coqc.exe"
+COQDEP= "/mnt/c/Coq/bin/coqdep.exe"
