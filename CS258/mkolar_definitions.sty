@@ -263,18 +263,25 @@
 \newcommand{\conv}{\textrm{conv}}
 
 
-
-
 \newtheoremstyle{mystyle}% name of the style to be used
   {}% measure of space to leave above the theorem. E.g.: 3pt
   {}% measure of space to leave below the theorem. E.g.: 3pt
-  {\normalfont}% name of font to use in the body of the theorem
+  {}% name of font to use in the body of the theorem
   {}% measure of space to indent
   {}% name of head font
   { }% punctuation between head and body
   {}% space after theorem head; " " = normal interword space
   {\textbf{\thmname{#1} \thmnumber{#2}} \textit{\thmnote{#3}}}% Manually specify head
-\theoremstyle{mystyle}
+
+\newtheoremstyle{break}%
+  {}{}%
+  {\normalfont}{}%
+  {\bfseries}{}% % Note that final punctuation is omitted.
+  { }{}
+
+\theoremstyle{break}
+
+
 
 \ifx\exercise\undefined
 \newcounter{exercise_cnt}
