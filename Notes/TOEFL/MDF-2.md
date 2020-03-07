@@ -9,7 +9,7 @@ categories:
 - English
 ---
 
-Good Expressions and Plot summary of Modern Family S11E02, Snapped
+Good Expressions in Modern Family S11E02, Snapped.
 
 **Keywords**: Modern Family
 
@@ -43,7 +43,7 @@ Good Expressions and Plot summary of Modern Family S11E02, Snapped
     - People use divine to express their pleasure or ejoyment of something
 - I shouldn't be piling on. 给更多压力
 - The flowers won't wilt
-- “throuple” ()= three couple) counseling
+- “throuple” (= three couple) counseling
 - Is fridgid snapped?
 
 
@@ -55,8 +55,9 @@ Good Expressions and Plot summary of Modern Family S11E02, Snapped
 ### Word Bank
 
 - present a compelling sales pitch 竞价
-- multi-family dwelling 多户型住宅
 - push her hard
+- multi-family dwelling 多户型住宅
+- property code
 - informative and funky
 - mug 保温杯
 - post the winner
@@ -97,12 +98,30 @@ Good Expressions and Plot summary of Modern Family S11E02, Snapped
 - cherry-picking what happened today (挑最好的)
 - cast me in the worst possible light 用最坏的灯照我
 
-### Summary
-
-
 
 ## Interview [Claire]
 I have to be kept in the loop for several projects at a time.
 - meet the rest of the clan
+- Phil is watching marathons of “snapped”
+    - it's a show about women driven to violent crime
+    - Watch a movie marathon. You can rent a ton of your faves or just watch a themed-marathon on a TV network.
 - hit the road
 - see yourself out 自己离开
+
+---
+
+- ride up front with the captain
+- frostbite 冻伤
+- hang loose signs 666的手势
+- take a look at this charcoal drawing木炭画 i've been fooling with
+- wind up with a massive sunburn 最后大面积晒伤了
+
+---
+- the closet business is a bit of a boys' club
+- break through the cedar ceiling
+---
+
+- wear makeup 
+- be such an embarrassment 我让你们尴尬了
+- have friends over 请朋友来玩
+- refer to me as Helga 把我称为
