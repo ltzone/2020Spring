@@ -11,3 +11,4 @@
 *.vok
 *.vos
 _CoqProject
+.vscode
