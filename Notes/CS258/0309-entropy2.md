@@ -9,8 +9,9 @@ categories:
 - Courses
 
 ---
+Week 2 of 2020 Spring. More about Entropy
 
-**KeyWords**: Relative Entropy
+**KeyWords**: Relative Entropy, Mutual Information
 
 <!--more-->
 
