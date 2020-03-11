@@ -1,5 +1,5 @@
 ---
-title: 【Computer Composition】2 Evolution and Performance2
+title: 【Computer Composition】2 Evolution and Performance (cont'd)
 url: cc-evolution2
 date: 2020-03-09 13:58:09
 tags: 
@@ -169,7 +169,7 @@ Clock can't be arbitrarily fast
 - Signals may be change at different speeds
 - Operations need to be synchronized
 
-CPU Time
+### CPU Time
 $$
 \begin{aligned}
 \text{CPU Time} &= \text{CPU Clock Cycles} \times \text{Clock Cycle Time} \\
@@ -180,3 +180,78 @@ $$
 - 提升clock rate
 - 但降低clock数,往往增加周期数(各类指令的需求平衡)
 - 硬件设计师往往trade off clock rate against cycle count
+
+### Instruction Count and CPI
+$$
+\begin{aligned}
+\text{CPU Time} &= \text{CPU Clock Cycles} \times \text{CPI} \times \text{Clock Cycle Time} \\
+&= \frac{\text{CPU Clock Cycles}\times \text{CPI}}{\text{Clock Rate}}
+\end{aligned}
+$$
+
+### CPI = Cycle per instruction, 提升方式
+- 减少指令数
+  - Program(算法优化), ISA(指令架构), Compiler(合适的编译器)
+- 减少每条指令的平均时间(average cycles per instruction)
+  - 由CPU决定
+  - 由不同指令的CPI决定(+不同指令的数目/混合)
+- 因此Cycle Time, CPI,... 都不能单独决定CPU的Performance.
+
+### CPI in more detail
+- If different instruction classes take different numbers of cycles (for a particular program/sequence)
+$$
+\text{Clock Cycles} = \sum_{i=1}^{n} (\text{CPI}_i\times\text{instruction count}_i)
+$$ 
+  其中i指CPI数目相同的某类指令.
+$$
+\text{Avg.CPI} = \frac{\text{Clock Cycles}}{\text{Total Instruction Count}}
+$$
+
+### CPU Time Summary
+$$
+\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}}\times \frac{\text{Clock Cycles}}{\text{Instruction}}\times \frac{\text{Seconds}}{\text{Clock Cycle}}
+$$
+- Algorithm: affects IC, possibly CPI
+- Programming Language: affects IC, CPI
+- Compiler: affects IC, CPI
+- Instruction Set Architecture: affects IC, CPI, $T_C$
+
+
+### Instruction Execution Rate
+Instructions executed per second
+- MIPS: millions of instructions per second (一般评估CPU的定点性能)
+- MFLOPS: millions of floating point instructions per second (CPU在没有硬件加速模块下, 浮点运算只能由模拟完成, 在DSP(数字信号处理)方面应广泛)
+- dependent on instruction set/compiler design/**processor implementation**/**cache & memory hierarchy**(影响运算时操作对象取得的方式)
+
+## Benchmarks
+针对MIPS的难以衡量,我们提出了Benchmarks这一衡量基准
+本质是一系列程序
+- Programs designed to test performance
+- Written in high level language (**Portable**)
+- Represents style of task: systems/numerical/commercial/IO/network
+- Easily measured
+- Widely distributed
+e.g. System Performance Evaluation Corporation(SPEC)
+- CPU2006 for computation bound
+  - 17 floating point programs in C, C++, Fortran
+  - 12 integer programs in C, C++
+  - other different sets ...
+  - 3 million lines of code
+- 测试结果: ratio of reference time to system run time, 对Single Task
+  $$r_i=\frac{\text{Tref}_i}{\text{Tsut}_i}$$
+  对整体,Throughput, 我们采用**几何平均**, 使各个值的参考意义更为准确
+  $$r_G = (\prod_{i=1}^{n} r_i)^{\frac{1}{n}}$$
+
+## Amdahl's Law
+多核处理器的加速可能性?
+- 代码需要能够并行化
+- 加速比是有界的, 边际效益递减
+- For program running on a single processor
+  - $f$ 程序支持无限并行处理的部分
+  - $1-f$ 不可并行(inherently serial)
+  - 增加$N$CPU,对原本$T$execution time的程序:
+  $$ \text{Speedup} &= \frac{\text{time on a single processor}}{\text{time on N parallel processors}} \\
+  &= \frac{T(1-f)+Tf}{T(1-f)+\frac{Tf}{N}} =  \frac{1}{(1-f)+\frac{f}{N}} \rightarrow \frac{1}{1-f}
+  $$
+> ![](img/0311-1.png)
+
