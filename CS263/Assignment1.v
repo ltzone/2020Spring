@@ -164,7 +164,7 @@ Informal description: the program [c] will not change the sum of [X] and [Y].
 Do they express equivalent meaning? 1: Yes. 2: No.
 *)
 
-Definition my_choice: Z := 1.
+Definition my_choice: Z := 2.
 
 End Task2_5.
 (** [] *)
