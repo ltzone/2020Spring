@@ -120,5 +120,64 @@ e.g. Given: $X \perp Y | Z$ and $X \perp Z$ and Prove: $X \perp Y$
 那么如果要使$I(X;Y)=0$, 我们需要$H(X)\le H(Z)$, 即信息长度小于密钥长度.
 
 
-### Fano's Inequality: Estimation
-我们希望从现象中归纳本质规律, 假定我们用随机变量$X$表示本质,$Y$表示X反映出的现象. 我们希望构造$\hat{X} = g(Y)$. 我们允许$\hat{X}$字母表不限, $g(Y)$中允许随机变量. 要估计$\hat{X} \neq X$的概率, 我们发现
+## Fano's Inequality: Estimation
+
+### Background
+
+- Suppose that we wish to estimate a random variable 𝑋with a distribution $𝑝(𝑥)$.
+- We observe a random variable $𝑌$ that is related to 𝑋by the conditional distribution $𝑝(𝑦|𝑥)$.
+- From 𝑌, we calculate a function $𝑔(𝑌)=\hat{X}$, where $\hat{X}$ 𝑋is an estimate of 𝑋and takes on values in $\hat{X}$.
+  - We will not restrict the alphabet $\hat{X}$ to be equal to 𝑋, and we will also allow the function 𝑔(𝑌)to be random.
+- We wish to bound the probability that $\hat{X}$≠𝑋. We observe that 𝑋→𝑌→$\hat{X}$ forms a Markov chain. Define the probability of error
+  $P_e=Pr(\hat{X} \neq X)$
+- When 𝐻(𝑋|𝑌)=0, we know that $P_e=0$. How about $𝐻(𝑋|𝑌)$,as $P_e\rightarrow 0$?
+
+> **Theorem (Fano’s Inequality)** For any estimator $\hat{X}$ such that $X \rightarrow Y \rightarrow \hat{X}$ with $P_e = \Pr(\hat{X}\neq X)$ we have
+> $$H\left(P_{e}\right)+P_{e} \log |\mathcal{X}| \geq H(X | \hat{X}) \geqslant H(X | Y)$$
+> Or can be weakened to
+> $$1+P_{e} \log |\mathcal{X}| \geqslant H(X | Y) \text{ or } P_{e} \geqslant \frac{H(X| Y)-1}{\log |x|}$$
+> 
+> 后者是data-processing 不等式, 前者是法诺不等式的核心部分.
+
+### Proof
+
+Define an error random variable 
+$$E=\left\{\begin{array}{ll}
+0, & \text { if } \hat{X}=X \\
+1, & \text { if } \hat{X} \neq X
+\end{array}\right.$$
+Then
+$$\begin{aligned}
+H(E, X | \hat{X}) &=H(X | \hat{X})+H(E | X, \bar{X}) \\
+&=H(E | \hat{X})+H(X | E, \hat{X})
+\end{aligned}$$
+
+- 马尔可夫链implies$H(E | X, \hat{X})=0$
+- 第二步,  $H(X|\hat{X},E=1)<=H(x)=H(P_e)$, 熵永远小于字母表的对数值
+- 此外, $H(X | E, \hat{X}) \leq P_{e} \log |x|$ 因为
+$$\begin{aligned}
+H(X | E, \hat{X}) &=\operatorname{Pr}(E=0) H(X | \hat{X}, E=0)+\operatorname{Pr}(E=1) H(X | \hat{X}, E=1) \\
+& \leq\left(1-P_{e}\right) 0+P_{e} \log |\mathcal{X}|
+\end{aligned}$$
+
+**Corollary** Let $P_{e}=\operatorname{Pr}(X \neq \hat{X})$, and let $\hat{X}: y \rightarrow x$; then $H\left(P_{e}\right)+P_{e} \log (|x|-1) \geq H(X | Y)$, 由于已知$X$和$\hat{X}$不等, 在估计时, 熵的上界可以调小 (corollary)
+
+直观理解:
+$P_e \rightarrow 0$ implies $H(P_e) \rightarrow 0$ implies $H(X|Y)\rightarrow 0$ 错误率趋向于0时, X和Y的关系趋向确定.
+
+Recall: binary entropy function
+$H(p)=-plogp-(1-p)log(1-p)$ 实际是简写的记号, 计算的是两点分布的熵
+
+## Convexity/ Concavity of Information Measures
+
+**Log Sum Inequality** for nonnegative $a_1, \cdots, a_n$ and $b_1, \cdots, b_n$,
+$$\sum_{i=1}^{n} a_{i} \log \frac{a_{i}}{b_{i}} \geq\left(\sum_{i=1}^{n} a_{i}\right) \log \frac{\sum_{i=1}^{n} a_{i}}{\sum_{i=1}^{n} b_{i}}$$
+with equality if and only if $\frac{a_i}{b_i}=const$.
+Pf. by moving $\left(\sum_{i=1}^{n} a_{i}\right)$ to the left, the coefficient can be regarded as a probability distribution.
+
+Corollaries:
+- Concavity of $H(P)$
+- $(X,Y)~p(x,y)=p(x)p(y|x)$, then $I(X;Y)$is a concave function of $p(x)$ for fixed $p(y|x)$ and a convex function of$p(y|x)$ for fixed $p(x)$ 
+  - Note given $p(x)$, $p(y|x) \rightarrow p(x,y) \rightarrowp(y)$
+- Convexity of relative entropy. $D(p\|q)$is a convex function for pair $(p,q)$.
+- 可以把 $p(x), p(y)$等看作高维空间上的一个点, 而不是概率分布. for $X ={1, 2,3...,n}$, define $\mathbb{x}_1 = p_1, \mathbb{x}_2= p_2, ..$
