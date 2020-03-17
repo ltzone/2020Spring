@@ -77,7 +77,7 @@
         &= - I(X;Z|T) \le 0  & \\[2mm]
       \end{array}
     \end{equation}
-    On the other hand, $I(Y;Z|X,T) \ge 0$. Hence $I(Y;Z|X,T)$ must be zero. That is to say, $Y \bot Z|(X,T)$.
+    On the other hand, $I(Y;Z|X,T) \ge 0$ can be proved by unfolding the definiton of conditional mutual information and the convexity property. Hence $I(Y;Z|X,T)$ must be zero. That is to say, $Y \bot Z|(X,T)$.
   \end{proof}
   \label{ex3}
   \end{exercise}
@@ -116,7 +116,7 @@
       \item {
         The inequality can be rewritten in form of areas as
         $$1+(1+2+3+4)\ge (1+2)+(1+4).$$
-        Since $I(Y;Z|(X,T))\ge 0$ has been proved in Exercise \ref{ex3}, the inequality holds.
+        Since $I(Y;Z|(X,T))\ge 0$, the inequality holds.
       }
       \item {
         The inequality can be rewritten in form of areas as
@@ -204,8 +204,8 @@
           \item If $X=Y$, there exists a one-to-one mapping, i.e. \(\rho(X,Y)= H(X | Y)+H(Y|X)=0\)
           
           On the other hand, if \(\rho(X,Y)= H(X | Y)+H(Y|X)=0\)
-          Since $H(X | Y) \geqslant 0 , \quad H(Y(X) \geqslant 0$ 
-          By the conclusion in Exercise 2, Assignment 1, there exists a one-to-one mapping between $X$ and $Y$.
+          Since $H(X | Y) \geqslant 0 , \quad H(Y(X) \geqslant 0$, we have $H(X | Y) = 0 , \quad H(Y(X) = 0$.
+          By the conclusion in Exercise 2, Assignment 1, $X$ and $Y$ are mutually each other's function, i.e.there exists a one-to-one mapping between $X$ and $Y$.
           \item The conclusion can be derived using condition-reduce-entropy and nonnegativity of conditional entropy.
             \begin{equation}\begin{aligned}
             H(X | Y)+H(Y | X)+H(Y|Z)+H(Z | Y) & \geqslant H(X| Y,Z)+H(Y | X )+H(Y | Z)+H(Z | Y,X) \\

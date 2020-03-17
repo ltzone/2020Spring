@@ -1,0 +1,149 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%    EXERCISE 1   %%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exercise}[Run-length coding]{Let $X_{1}, X_{2}, \ldots, X_{n}$ be (possibly dependent) binary random variables. Suppose that one calculates the run lengths $\mathbf{R}=\left(R_{1}, R_{2}, \ldots\right)$ of this sequence (in order as they occur $) .$ For example, the sequence $\mathbf{X}=0001100100$ yields run lengths $\mathbf{R}=(3,2,2,1,2) .$ Compare $H\left(X_{1}, X_{2}, \ldots, X_{n}\right), H(\mathbf{R})$ and $H\left(X_{n}, \mathbf{R}\right) .$ Show all equalities and inequalities, and bound all the differences.}.
+  \begin{solution}
+    \par{~}
+    When $X_{1}, X_{2}, \ldots, X_{n}$ is determined, their running length is determined. $H\left(\mathbf{R}| X_{1}, X_{2}, \ldots, X_{n}\right) = 0$, which implie that $$H(\mathbf{R},X_{1}, X_{2}, \ldots, X_{n} ) = H(X_{1}, X_{2}, \ldots, X_{n} ) $$
+    When one element $X_{i}$ is determined, given the running length, the whole sequence will be determined.  That is to say $H\left(X_{1}, X_{2}, \ldots, X_{n}| X_i , \mathbf{R} \right) = 0$, which implies that 
+    $$H(\mathbf{R},X_{1}, X_{2},\ldots, X_{i} \ldots, X_{n}, X_{i} ) = H(\mathbf{R},X_{1}, X_{2}, \ldots, X_{n}) = H(X_i , \mathbf{R}) $$
+    Hence we have
+    \begin{equation}
+      \begin{aligned}
+        H(X_{1}, X_{2}, \ldots, X_{n} ) &= H(X_i,\mathbf{R}) & (\star) \\
+        &= H(\mathbf{R}) + H(X_i| \mathbf{R}) \\
+        &\le H(\mathbf{R}) + H(X_i) \\
+        &\le H(\mathbf{R}) + \log 2 =  H(\mathbf{R}) + 1 & (\star)
+      \end{aligned}
+    \end{equation}
+    On the other hand, since $H(X_i|R) \ge 0$, we have
+    \begin{equation}
+      H(X_{1}, X_{2}, \ldots, X_{n} ) = H(X_i,\mathbf{R})  = H(\mathbf{R}) + H(X_i| \mathbf{R}) \ge H(\mathbf{R}) \quad (\star)
+    \end{equation}
+    The starred lines make up all the equalities and inequalities required by the problem.
+  \end{solution}
+  \label{ex1}
+  \end{exercise}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%    EXERCISE 2   %%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exercise}[Grouping rule for entropy]{Let $\mathbf{p}=\left(p_{1}, p_{2}, \ldots, p_{m}\right)$ be a probability distribution on $m$ elements (i.e., $p_{i} \geq 0$ and $\sum_{i=1}^{m} p_{i}=1$ ). Define a new distribution q on $m-1$ elements as $q_{1}=p_{1}, q_{2}=p_{2}$ $\cdots, q_{m-2}=p_{m-2},$ and $q_{m-1}=p_{m-1}+p_{m}$ [i.e., the distribution $\mathbf{q}$ is the same as $\mathbf{p}$ on $\{1,2, \ldots, m-2\},$ and the probability of the last element in $\mathbf{q} \text { is the sum of the last two probabilities of } \mathbf{p}]$ Show that
+\begin{equation}H(\mathbf{p})=H(\mathbf{q})+\left(p_{m-1}+p_{m}\right) H\left(\frac{p_{m-1}}{p_{m-1}+p_{m}}, \frac{p_{m}}{p_{m-1}+p_{m}}\right)\end{equation}
+  }.
+  \begin{proof}
+    By unfolding the definiton of entropy we have
+    \begin{equation}\begin{aligned}
+      H(\mathbf{p}) &=-\sum_{i=1}^{m} p_{i} \log p_{i} =-\sum_{i=1}^{m-2} p_{i}\log p_{i}-p_{m-1} \log p_{m-1}-p_{m} \log p_{m} \\
+      &=-\sum_{i=1}^{m-2} q_{i} \log q_{i}-q_{m-1} \log q_{m-1}+ q_{m-1} \log q_{m-1} -p_{m-1} \log p_{m-1}-p_{m} \log p_{m} \\
+      &= H(\mathbf{q}) + (p_{m-1}+p_{m}) \log (p_{m-1}+p_{m}) -p_{m-1} \log p_{m-1}-p_{m} \log p_{m} \\
+      &= H(\mathbf{q})+\left(p_{m-1}+p_{m}\right)\left(- \frac{p_{m-1}}{p_{m-1}+p_{m}} \log \frac{p_{m-1}}{p_{m-1}+p_{m}} - \frac{p_{m}}{p_{m-1}+p_{m}} \log \frac{p_{m}}{p_{m-1}+p_{m}} \right) \\
+      &=H(\mathbf{q})+\left(p_{m-1}+p_{m}\right) H\left(\frac{p_{m-1}}{p_{m-1}+p_{m}}, \frac{p_{m}}{p_{m-1}+p_{m}}\right)
+      \end{aligned}\end{equation}
+  \end{proof}
+  \label{ex2}
+\end{exercise}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%    EXERCISE 3   %%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exercise}[Fano]{We are given the following joint distribution on $(X, Y):$
+  
+  \begin{table}[H]
+    \begin{center}
+    \begin{tabular}{c|ccc}
+    \diagbox{X}{Y} & a              & b              & c              \\ \hline
+    1                              & $\frac{1}{6}$  & $\frac{1}{12}$ & $\frac{1}{12}$ \\[2mm]
+    2                              & $\frac{1}{12}$ & $\frac{1}{6}$  & $\frac{1}{12}$ \\[2mm]
+    3                              & $\frac{1}{12}$ & $\frac{1}{12}$ & $\frac{1}{6}$ 
+    \end{tabular}
+    \end{center}
+  \end{table}
+
+  Let $\hat{X}(Y)$ be an estimator for $X$ (based on $Y$ ) and let $P_{e}=$ $\operatorname{Pr}\{\hat{X}(Y) \neq X\}$
+  \begin{enumerate}
+    \item Find the minimum probability of error estimator $\hat{X}(Y)$ and the associated $P_{e}$
+    \item Evaluate Fano's inequality for this problem and compare.
+  \end{enumerate}
+  }
+  \begin{solution}
+    \begin{enumerate}
+      \item {
+        By observation, a feasible deterministic estimator for $X$ can be defined as
+        \begin{equation}
+          \hat{X}(Y) = \left\{\begin{array}{ll}
+            1 & Y = a \\
+            2 & Y = b \\
+            3 & Y = c \\           
+          \end{array}  \right.
+        \end{equation}
+        In this case, the error probability is 
+        $$ P_e = \sum_{(x,y)\in {X \star Y}, x \neq y} p(x,y) = 6 \times \frac{1}{12} = \frac{1}{2}$$
+      }
+      \item {
+        The general Fano's inequality implies that
+      \begin{equation}P_{e} \geqslant \frac{H(X | Y)-1}{\log |\mathcal{X}|} \label{eqn:ex3_1}\end{equation}
+        We can calculate the conditional entropy
+        \begin{equation}
+          \begin{aligned}
+            H(X|Y) &= \sum_{y} p(y) H(X|Y=y) \\
+            &= 3 \cdot \frac{1}{3} H(\frac{1}{2},\frac{1}{4},\frac{1}{4}) \\
+            &=  \frac{1}{2} +  \frac{1}{2} +  \frac{1}{2} = \frac{3}{2}
+          \end{aligned}
+          \label{eqn:ex3_2}
+        \end{equation}
+        By substituting Equation \ref{eqn:ex3_2} into Equation \ref{eqn:ex3_1} we know
+        $$P_e \ge \frac{1.5 - 1}{\log_2 3} \approx 0.3155$$
+        If we assume $\hat{X}: y \rightarrow x$, then by the stronger Fano's inequality we have
+        $$P_e \ge \frac{H(X | Y)-1}{\log (|\mathcal{X}|-1)} \ge \frac{1.5 - 1}{\log_2 2} = 0.5$$
+        Hence, the estimator we have found is the best under condition that $\hat{X}: y \rightarrow x$. It may be improved by introducing randomness. However, the $P_e$ will not be less than $0.3155$.
+      }
+    \end{enumerate}
+  \end{solution}
+  \label{ex3}
+\end{exercise}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%    EXERCISE 4   %%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exercise}[Discrete entropies]{Let $X$ and $Y$ be two independent integervalued random variables. Let $X$ be uniformly distributed over $\{1,2, \ldots, 8\},$ and let $\operatorname{Pr}\{Y=k\}=2^{-k}, k=1,2,3, \ldots$
+  \begin{enumerate}
+    \item Find $H(X)$.
+    \item Find $H(Y)$.
+    \item Find $H(X+Y, X-Y)$
+  \end{enumerate}}
+  \begin{solution}
+    \par{~}
+    \begin{enumerate}
+      \item {
+        For uniform distribution of $X$, $H(X) = \log |\mathcal{X}| = \log 8 = 3$
+      }
+      \item By definiton $H(Y) = \sum_{k=1}^{\infty} 2^{-k} \log 2^{k} = \sum_{k=1}^{\infty} k 2^{-k} = 2$.
+      \item Since $(X,Y) \Leftrightarrow (X+Y,X-Y)$, we have $H(X+Y,X-Y|X,Y)=0$ and $H(X,Y|X+Y,X-Y) =0$. It follows that
+      \begin{equation}
+        \begin{aligned}
+          H(X,Y) &= H(X+Y,X-Y|X,Y) + H(X,Y) \\
+          &= H(X+Y,X-Y,X,Y) \\
+          &= H(X+Y,X-Y) + H(X,Y|X+Y,X-Y) \\
+          &= H(X+Y,X-Y)
+        \end{aligned}
+      \end{equation}
+      Since $X$ and $Y$ are independent,
+      $$H(X+Y,X-Y) = H(X,Y) = H(X) +H(Y) = 3 + 2 =5$$
+    \end{enumerate}
+
+
+
+
+  \end{solution}
+  \label{ex4}
+\end{exercise}
