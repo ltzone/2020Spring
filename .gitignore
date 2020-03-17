@@ -13,3 +13,5 @@
 _CoqProject
 .vscode
 CS258/template.aux
+*.cache
+CS258/template.pdf
