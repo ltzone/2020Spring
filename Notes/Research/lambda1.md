@@ -1,5 +1,5 @@
 ---
-title: 【Lambda Calculus】1
+title: 【Lambda Calculus】Introduction
 url: lambda-1
 date: 2020-03-11 14:30:13
 tags: 
@@ -126,8 +126,83 @@ Then it is easy to check that
 
 We define booleans without booleans.
 
+### Sets
+- We define $e\in e' := e' e$.
+- $e_1 \cup e_2 := \lambda x. or (e_1 x) (e_2 x)$
+- $e_1 \cap e_2 := \lambda x. and (e_1 x) (e_2 x)$
+
+- Infinite negation
+  Russel Set $R = {e | e \notin e}$, is $R \in R$?
+  in lambda language, $R = \lambda x. not(x x)$
+  > 这个问题没有答案, 它会不停地一步一步计算evaluate下去
+  $$\begin{aligned}
+  R\quad R &\mapsto (\neg (x \quad x))[R/x] \\
+  &= \neg (R \quad R) \\
+  &\mapsto \neg (\neg (R \quad R)) \mapsto \ldots
+  \end{aligned}s$$
+- infinite refl
+  $\omega = (\lambda x.x x) (\lambda x.x x)$
+  $\omega \mapsto \omega$
+- infinite apply 设计y combinator, 使得`y f`一步后得到`f(y f)`由此不停地套用下去.
+  `y f = (λx.f(xx))(λx.f(xx))`
+  $y f \mapsto f(y f)$
+
+Use lambda calculus to define recursive functions.  Paradox in the language makes recursion happen
+$$\begin{aligned}
+  times = \lambda x. \lambda y. \quad if \quad x == 0 \quad & then \quad 0 \\
+  & else \quad y + times \space (x-1)\space  y
+\end{aligned}$$
+$$\begin{aligned}
+  timesish = \lambda next. \lambda x. \lambda y. if \quad x == 0 \quad & then \quad 0 \\
+  & else \quad y + (next \space (x-1) \space y)
+\end{aligned}$$
+
+## Untyped vs. typed
+
+Typing rules:
+$$
+\tau \in \text{Type} = \alpha | \tau_1 \rightarrow \tau_2
+$$
+
+$$
+\begin{array}{c}
+\hline
+\Gamma x :\tau \vdash x : \tau
+\end{array}
+$$
+
+$$
+\begin{array}{c}
+\Gamma \vdash e: \tau^{\prime} \rightarrow \tau \quad \Gamma \vdash e^{\prime} : \tau^{\prime} \\
+\hline
+\Gamma \vdash e \space e' :\tau
+\end{array}
+$$
+
+$$
+\begin{array}{c}
+\Gamma x:\tau \vdash e: \tau^{\prime} \\
+\hline
+\Gamma \vdash \lambda x.e :\tau \rightarrow \tau^{\prime}
+\end{array}
+$$
+
+An example:
 
 
+$$
+\begin{array}{c}
+\hline
+x:\alpha \vdash x: \alpha \\
+\hline
+\vdash \lambda x.x :\alpha \rightarrow \alpha 
+\end{array}
+$$
 
-## Homework
-1. encode natural numbers in lambda calculus.
+
+Context是变量名到类型的映射.
+
+> Theorem (termination) if a term e is will-typed under any context. Then there exists an $e^{\prime}$ such that $e \mapsto e^{\prime}$ and $e^{\prime}$ will not reduce to anything.
+
+在Typed system下, self-apply是不被允许的
+
