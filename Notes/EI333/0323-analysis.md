@@ -83,6 +83,7 @@ Order of steps
 
 ### Object Identifications
 
+#### Object Identification
 - Identify the **boundaries** of the system 开发财务系统还是开发企业管理系统, 哪些是系统的内部对象, 哪些是与系统交互的对象
 - Identify the **important** **entities** in the system
 - Object identification is crucial to object-oriented modeling
@@ -191,7 +192,7 @@ Control Objects 控制类
 在UML中, 存在原型机制, 可以手动选择.
 
 
-#### Mapping Use Cases to Objects with Sequence Diagrams
+### Mapping Use Cases to Objects with Sequence Diagrams
 识别对象的第二方法. Sequence Diagram是识别对象过程的工具, 边画sequence diagram边做决定,做设计.
 
 - An event always has a sender and a receiver. 我们通过sender和receiver识别对象
@@ -234,6 +235,8 @@ access:
 
 ![](img/03-23-11-36-22.png)
 
+> 注意: 我们用匿名示例(下划线+`:classname`)表示顺序图
+
 两种风格的责任分配
 | 集中式 | 分布式 |
 |--|--|
@@ -245,12 +248,229 @@ access:
 现在, 云端能力极大提升, centralized好
 未来, 又提倡数据存储在终端, 边缘分布式, decentralized好.
 
+
+### Modeling Interactions among objects with CRC cards
+CRC: Class, Responsibilities, and Collaborators
+![](img/03-26-10-09-12.png)
+
+
 ### Identify Associations
 
+association 是types（more specifically, instance）之间meaningful and intresting 的关系。
+
+如何确定需要标明的关系?
+1. Associations for which knowledge of the relationship needs to be **preserved for some duration**
+2. Associations **derived from the Common Associations List**
+
+首先我们要确定一个Common Associations List, 根据我们的经验, 以下association会被建模出来
+- Physical part of
+- Logical part of
+- Member of 
+- ……
+
+> ![](img/03-26-10-14-08.png)
+> 之间存在write关系, 标明角色可以使关系之间的语义更为完整
+> UML作图时命名是好习惯.
+
+下图刻画了我们画图时需要注意的方方面面.
+![](img/03-26-10-16-53.png)
+- name: 不可缺少
+- role: 介绍对象承担作用,一方面便于理解, 另一方面方面模型mapping代码, 成为**类的属性**依据 (optional)
+- 多重性
+- 关联类
+- Quantifier:限定符, 如何将
+
+如何理解多重性?
+- instance千千万, 我们说的是类
+- ![](img/03-26-10-18-06.png)
+- 1个store会有多少item? 一对多
+- 一个item在几个store里? 一对一
+- 你怎么说商品专属于一个store呢?
+  - 我们看的多重性是在一个**时刻点**上允许的关系, 即sequence diagram上某一时刻, 合法的数量关系
+- 具有多种不同的表示形式
+  - ![](img/03-26-10-19-54.png)
+
+关联之间也存在方向
+- ![](img/03-26-10-20-15.png)
+- 给定一个order, 我们能直接找到customer
+- 给定一个customer, 我们不能直接找到order
+- 可以建模时暂时不画箭头, 说明想法, 在建模的过程中完善.
+
 ### Identify Aggregates
+aggregation, 一种特殊的association, 聚合关系. 表达整体和部分的关系.
+
+我们可能还要进一步强化aggregation(聚合)这一概念, 用composition(组合)如整体和部分在某些情形下存在同生死共存亡的关系. 即如果整体不存在,部分也不存在.
+![](img/03-26-10-24-14.png)
+
+Shared Aggregation, 今天属于你, 明天属于别人. means that the multiplicity at the composite end may be more than one, and is signified with a hollow diamond. It implies that the part may be simultaneously in many composite instances.
+
+![](img/03-26-10-25-05.png)
+
+我们做一个直接对比
+![](img/03-26-10-25-20.png)
+多边形不存在, 圆不存在, 那么点就不存在了.
+如果是格式, 那么它不一定属于特定的圆, 特定的点.
 
 ### Identify Attributes
 
-## Reviewing the Analysis Model
+只关注我们所关注的属性, 在class的第二格中
+属性名:类型.
+
+需要注意的地方: 
+1. Keep Attributes Simple
+   - ![](img/03-26-10-29-08.png)
+   - 因为flight可以取消, 但destination是确定的, 所以用association更好
+2. Data Types:
+   - 简单类型: number, string
+   - 非简单类型: 最好做成类(conceptual class)
+     - 条形码, 身份证id 因为他们有自己的方法
+     - 重量, 因为他们有单位, 可能分为若干部分
+
+### Modeling State-Dependent Behavior of Individual Objects
+
+圆角矩形代表状态, 实心黑点代表起始状态. 外加圈代表终止状态. 中间各个状态之间由箭头表示状态的变化情况. 状态内部允许嵌套. 每个状态有状态名.
+
+![](img/03-26-10-36-26.png)
+
+状态图是如何画的?
+
+1. 信息来源: Use Case
+   以电话机为例: Caller lifts receiver/ Dial tone begins/ Caller dials/ Phone rings/ Callee answers phone/ Ringing stops
+2. 状态变化伴随着事件的发生, 可能还伴有动作.
+   比如: 电话机从基座拿起, idle 到active状态的转变, 电话机会播放拨号音(action)
+   ![](img/03-26-10-41-28.png)
+3. 区分两个概念:
+   - activity: 需要时间完成的(通常和states连接)
+   - action: 瞬时完成的操作(通常和events连接, 或者states中的entry/exit/internal)
+4. statechart刻画的一定是**一个类**的生命周期. 当然, 不见得每个类都需要画状态机图.
+
+什么是状态:
+- 数学意义上, 是变量的取值
+- 在工程上, 和需求相关, 进行分类. 且需要稳定持续一段时间
+
+![](img/03-26-10-58-05.png)
+上图刻画一个自动售货机的状态变化. 好像售货机的过程也没有那么简单, 特别是dispense item这一环. 我们将它定义为一个superstate, 另作图展开.
+‘Dispense item’as a composite activity [or sub-machine]:
+![](img/03-26-10-59-46.png)
+
+
+#### concurrency
+状态机图也可以表示并发(concurrency)
+计算机有两个层面的并发:
+1. 系统层面: 可以用状态机图表示系统层面需要关注的并发状态
+2. object层面: 一个对象的若干子状态会同时成立
+如 付钱时, 可以选择部分现金,部分card, 可能处于两个状态上或两个状态之一. 我们用一根虚线表示
+![](img/03-26-11-02-19.png)
+
+#### State Chart Diagram vs Sequence Diagram
+都是随着时间的变化, 但前者表示object个体的变化, 后者表示object对外界消息的相应, 描述对象之间的关系.
+**State diagrams are class-level documentation; sequence diagrams are instance-level documents.**
+有生命线的是instance, sequence diagram是指名道姓地讲故事
+
+#### Dynamic Modeling of User Interfaces
+state chart diagram 一大特殊用处是对用户界面进行建模.
+- Statechart diagrams can be used for the design of user interfaces
+  - Also called **Navigation Path**
+- States: Name of screens
+  - Graphical layout of the screens associated with the states helps when presenting the dynamic model of a user nterface 
+- Activities/actions are shown as bullets under screen name
+  - Often only the exit action is shown
+- State transitions: Result of  exit action
+  - Button click
+  - Menu selection
+  - Cursor movements
+- Good for web-based user interface design
+
+### Modeling Inheritance Relationships between Objects
+
+目前, 我们已经识别了一堆类. 我们在这里特别关注一下类的继承层次关系. Create generalization(相似性)-specialization(多样性) hierachies
+
+规律: Apply the “100%” and “IS-a” tests to validate subclasses
+
+> 100% Rule: 子类的属性,关联是否100%符合父类
+> 100% of the conceptual superclass’s definition should be applicable the sub-class. The subclass must conform to 100% of the superclass’s:
+> - Attributes
+> - associations
+
+> Is-a Rule
+> All the members of a sub-class set must be members of their superclass set.
+> In natural language, this can usually be informally tested by forming the statement: Subclass **is a** Superclass
+
 
 ## Managing Analysis
+
+
+分析阶段的成果: RAD文档(Requirements Analysis Document)
+```
+1.	Introduction
+2.	Current system
+3.	Proposed system
+	3.1	Overview
+	3.2	Functional requirements
+	3.3	Nonfunctional requirements
+	3.4	Constraints (“Pseudo requirements”)  
+	3.5	System models
+		3.5.1  Scenarios
+		3.5.2  Use case model
+		3.5.3  Object model
+		          3.5.3.1 Data dictionary
+		          3.5.3.2 Class diagrams
+		3.5.4  Dynamic models
+		3.5.5  User interface
+4. Glossary
+```
+
+### Class Diagrams
+- Purpose of Class diagrams :
+  - The description of the static properties of a system (main purpose)
+  - [Has a lot to do with the semantic meaning of the parts]
+- Who uses class diagrams?
+  - The **application domain expert** uses class diagrams to model the application domain
+  - The **developer** uses class diagrams  during the development of a system,that is, during analysis, system design, object design and implementation.
+  - The **customer** and the **end user** are often not interested in class diagrams. They usually focus more on the functionality of the system.  
+
+### Application domain vs solution domain
+- Application domain: 
+  - The problem domain (financial services, meteorology, accident management, architecture, …).
+- Application domain class: 
+  - An abstraction in the application domain. If we model business applications, these classes are also  called business objects. 
+  - Example: Board game, Tournament
+- Solution domain:
+  - Domains that help in the solution of  problems (tele communication, data bases, compiler construction, operating systems, ….)
+- Solution domain class: 
+  - An abstraction, that is introduced for technical reasons, because it helps in the solution of a problem.
+  - Examples:  Tree,  Hashtable, Scheduler
+
+
+Roles
+- Analyst: 分解问题
+- Designer: 确定接口, class library
+- Implementor:
+  - Class implementor: 实现类
+    - Implements the class. The implementor chooses appropriate data structures (for the attributes) and algorithms (for the operations),  and realizes the interface of the class in a programming language [as a source code file] .
+  - Class extender: 对类扩展
+    - Extends the class by a subclass, which is needed for a new problem or a new application domain. [Methods may be extended too.]
+  - Class-user (client): 调用类生成的对象和方法
+    - The programmer, who wants to use an existing class (e.g. a class from a class library or a class from another subsystem). 
+    - The class user is only interested in the signatures of the class operations and the preconditions under which they can be invoked. The class user is not so much interested in the implementation of the class. 
+
+
+## Summary
+1. 分析需求: What are the transformations?  (Functional Modeling)
+   Create _**scenarios**_ and  _**use case diagrams**_
+   - Talk to client, observe, get historical records, do thought experiments 
+2. 系统实现: What is the structure of the system? (Object Modeling)
+   Create _**class diagrams**_ [static information models]
+   - Identify **objects**. 
+   - What are the associations between them? What is their **multiplicity**?
+   - What are the **attributes** of the objects?
+   - What **operations** are defined on the objects?
+3. 定义行为: What is its behavior? (Dynamic Modeling)
+   3.1. Create _**sequence diagrams**_ [Dynamic object behavior instance examples]
+   - Identify event senders and receivers
+   - Show sequence of events exchanged between objects. 		 Identify event dependencies and event concurrency.
+  
+   3.2. Create  _**state diagrams**_  [Dynamic class method behavior models]
+   - Only for the dynamically interesting objects.
+
+下一步就是Design了.
