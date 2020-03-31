@@ -63,12 +63,12 @@
 
     Assume that for any $n\le m-1$, with $\sum_{i=1}^{n} 2^{-l_i} \le \frac{3}{4}$ we can construct $n$ different codeword lengths. We prove that this holds for the case of $m$.
     
-    Let $m'$ be the largest index $i$ with $l_i < l_{m'}$. By induction hypothesis we can construct a fix-free code $C'$ with the lengths $l_1, \ldots, l_{m'}$. Note for every particular word with length $l_i$, it will occupy at most $2\times 2^{l_{m}-l_i}$ nodes due to the prefix and suffix rule. However, with our restriction, $2^{l_m - 2l_i}$ nodes will be returned, since they will not actually be used as codewords. Therefore, at the $l_N$ level, at most $2 \sum_{i=1}^{m'} 2^{l_m-l_i}- \sum_{i=1}^{m'}2^{l_{m'} - 2l_i}$ nodes will be occupied.\footnote{The paper gives a more detailed formula, but I can't fully understand how the last component formula is derived. Fortunately leaving the that component out will not affect the proof here. }
+    Let $m'$ be the largest index $i$ with $l_i < l_{m'}$. By induction hypothesis we can construct a fix-free code $C'$ with the lengths $l_1, \ldots, l_{m'}$. Note for every particular word with length $l_i$, it will occupy at most $2\times 2^{l_{m}-l_i}$ nodes due to the prefix and suffix rule. However, with our restriction, $2^{l_m - 2l_i}$ nodes will be returned, since they will not actually be used as codewords. Therefore, at the $l_m$ level, at most $2 \sum_{i=1}^{m'} 2^{l_m-l_i}- \sum_{i=1}^{m'}2^{l_{m} - 2l_i}$ nodes will be occupied.\footnote{The paper gives a more detailed formula, but I can't fully understand how the last component formula is derived. Fortunately leaving the that component out will not affect the proof here. }
 
     To ensure that the remaining $l_{m'+1},\ldots,l_m$ can be added to the orginal code system we should have
 
     \begin{equation}
-      2 \sum_{i=1}^{m} 2^{l_m -l_i}- \sum_{i=1}^{m}2^{l_m - 2l_i} \le 2^{l_m} - (m -m')
+      2 \sum_{i=1}^{m'} 2^{l_m -l_i}- \sum_{i=1}^{m'}2^{l_m - 2l_i} \le 2^{l_m} - (m -m')
       \label{eqn1}
     \end{equation}
 
