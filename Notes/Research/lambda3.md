@@ -138,17 +138,17 @@ What's the type of fold and unfold?
 
 $$
 \begin{array}{c}
-\Gamma \vdash e :\tau [ \mu_{\alpha}.\tau/\alpha] \\
+\Gamma \vdash e :\tau [ \mu_{\alpha.\tau}/\alpha] \\
 \hline
-\Gamma \vdash fold(e): \mu_{\alpha} . \tau 
+\Gamma \vdash \text{fold}(e): \mu_{\alpha. \tau } 
 \end{array}
 $$
 
 $$
 \begin{array}{c}
-\Gamma \vdash e :\mu_{\alpha} . \tau \\
+\Gamma \vdash e :\mu_{\alpha. \tau}  \\
 \hline
-\Gamma \vdash unfold(e): \tau [ \mu_{\alpha}.\tau/\alpha]
+\Gamma \vdash \text{unfold}(e): \tau [ \mu_{\alpha.\tau}/\alpha]
 \end{array}
 $$
 
@@ -166,7 +166,7 @@ $$
 (\alpha) \quad
 \begin{array}{c}
 \hline
-unfold(fold(e)) \mapsto e
+\text{unfold}(\text{fold}(e)) \mapsto e
 \end{array}
 $$
 
@@ -175,7 +175,7 @@ $$
 \begin{array}{c}
 e \mapsto e' \\
 \hline
-unfold(e) \mapsto unfold(e')
+\text{unfold}(e) \mapsto \text{unfold}(e')
 \end{array}
 $$
 
@@ -183,7 +183,7 @@ $$
 (\eta) \quad
 \begin{array}{c}
 \hline
-fold(unfold(e)) = _{\eta} e : \mu_{\alpha}.\tau \\
+\text{fold}(\text{unfold}(e)) = _{\eta} e : \mu_{\alpha.\tau} \\
 \end{array}
 $$
 
@@ -197,17 +197,17 @@ $$
 \begin{array}{c}
 e:val\\
 \hline
-fold(e):val
+\text{fold}(e):val
 \end{array} \\ \\
 \begin{array}{c}
 e:val\\
 \hline
-unfold (fold (e)) \mapsto e
+\text{unfold} (\text{fold} (e)) \mapsto e
 \end{array} \\ \\
 \begin{array}{c}
 e \mapsto e'\\
 \hline
-fold (e)) \mapsto fold(e')
+\text{fold} (e) \mapsto \text{fold}(e')
 \end{array} \\ \\
 \text{+ other parts above}
 \end{array}
@@ -217,28 +217,28 @@ fold和unfold语义描述的是我们对expression执行unpack和pack的先后�
 
 ## Recursive Types
 Now we use these general rules to figure out recursive types. 
-朴素的Type定义中, $Nat \approx unit + Nat$
+朴素的Type定义中, $\text{Nat} \approx \text{unit} + \text{Nat}$
 in order to get rid of circulating, 我们引入了$\mu_{\alpha.\tau}$表达
 $\alpha$ is the recursive occurence of something.
 
 对自然数
 $$
 \begin{array}{c}
-Nat = \mu_{\alpha.unit} + \alpha \\
-Z = fold (l \cdot \diamondsuit ) \\
-S\space e = fold (r \cdot e)
+\text{Nat} = \mu_{\alpha.unit} + \alpha \\
+Z = \text{fold} (l \cdot \diamondsuit ) \\
+S\space e = \text{fold} (r \cdot e)
 \end{array}
 $$
 
 对列表,我们也可以这样定义
 $$
 \begin{array}{c}
-List \space \tau \approx unit + (\tau \times List \space \tau)\\
+\text{List} \space \tau \approx \text{unit} + (\tau \times \text{List} \space \tau)\\
 \Leftrightarrow
 \begin{array}{l}  
-List \space \tau = \mu_{\alpha.unit} + (\tau \times \alpha) \\
-\text{nil} = fold (l \cdot \Diamond) \\
-\text{cons }e\space e' = fold (r \cdot \left< e , e' \right>) 
+\text{List} \space \tau = \mu_{\alpha.\text{unit}} + (\tau \times \alpha) \\
+\text{nil} = \text{fold} (l \cdot \Diamond) \\
+\text{cons }e\space e' = \text{fold} (r \cdot \left< e , e' \right>) 
 \end{array}
 \end{array}
 $$
@@ -285,15 +285,79 @@ $$
 \end{array}
 $$
 Hence we can derive the type of the recursor.
+
+
+### Application of Recursion
+
 $$
 \begin{array}{l}
 \omega : \mu_{\alpha.(\alpha\rightarrow\tau)}\rightarrow \tau\\
-\omega = \lambda x:\mu_{\alpha.(\alpha\rightarrow\tau)}. unfold(x)[:\mu_{\alpha.(\alpha\rightarrow\tau)}\rightarrow \tau] \space x \\
+\omega = \lambda x:\mu_{\alpha.(\alpha\rightarrow\tau)}. \text{unfold}(x)[:\mu_{\alpha.(\alpha\rightarrow\tau)}\rightarrow \tau] \space x \\
 \Omega : \tau \\
 \begin{array}{ll}
-\Omega = \omega \space & (fold (\omega)) \\
+\Omega = \omega \space & (\text{fold} (\omega)) \\
 & \text{↑ which is } \mu_{\alpha.(\alpha\rightarrow\tau)} 
 \end{array}  \\
 \Rightarrow \text{Type Checks!}
 \end{array}
+$$
+
+$\Omega$ isn’t very useful; a reduction step just regenerates the same again. But what happens if we have something like  $\Omega$ that changes a bit every step.
+
+Given a function on $\tau$, $y$ gives back a fixpoint. 
+
+$$y: (\tau \rightarrow \tau) \rightarrow \tau$$
+
+
+$$y = \lambda f:\tau \rightarrow \tau. (\lambda x:\mu_{\alpha \rightarrow \tau}. f ((\text{unfold } x) \space x))$$
+
+函数值中的部分实际上是
+
+$$ \text{fold} (\lambda x :\mu_{\alpha \rightarrow \tau}. f ((\text{unfold } x) \space x)) $$
+
+So actually $y$ takes several steps from $f$ to a fixpoint.
+
+$$
+\begin{aligned}
+  \Omega = \omega \space (\text{fold } \omega) & \mapsto (\text{unfold } (\text{fold } \omega)) \space (\text{fold } \omega) \\
+  & \mapsto \omega \space (\text{fold } \omega)
+\end{aligned}
+$$
+
+This is how we get 
+$$
+y\space f = f\space (y\space f)
+$$
+
+### Example
+
+Why is a the fixed-point generator $Y$ useful? Because it can be used to implement recursion, even though there is no recursion in the $\lambda$ -calculus to begin with. For example, this recursive definition of multiplication
+$$
+\text {times}=\lambda x . \lambda y . \text { if } x \leq 0 \text { then } 0 \text { else } y+(\text {times}\space(x-1) \space y)
+$$
+can instead be written non-recursively by using $Y$ like so:
+$$
+\begin{aligned}
+\text {timesish} &=\lambda \text {next.} \lambda x . \lambda y . \text { if } x \leq 0 \text { then } 0 \text { else } y+(\text {next }\space \space (x-1) \space \space y) \\
+\text {times} &=Y \text { timesish}
+\end{aligned}
+$$
+Now check that times does the same thing as the recursive definition above:
+$$
+\begin{aligned}
+\text{times}\space 0 \space y & = Y \space\space \text{timesish} \space\space 0 \space\space y \\
+&\mapsto \text { timesish (}  Y  \space\space \text {timesish) } \space\space 0 \space\space y \\
+& \mapsto^{*} \text { if } 0 \leq 0 \text { then } 0 \text { else } y+(Y \space\space \text { timesish } \space\space (0-1) \space\space y)\\
+&\mapsto 0
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\text {times }\space\space(x+1)\space\space y &=Y \space\space \text { timesish }\space\space(x+1)\space\space y \\
+&\mapsto \text { timesish (} Y \space\space \text { timesish) } \space\space (x+1) \space\space y \\
+&\mapsto^{*} \text { if }(x+1) \leq 0 \text { then 0 else } y+(Y \text { timesish }\space\space (x+1-1) \space\space y) \\
+&\mapsto^{*} y+(Y \text { timesish }\space\space(x+1-1)\space\space  y) \\
+&\mapsto^{*} y+(\text { times}\space\space x\space\space y)
+\end{aligned}
 $$
