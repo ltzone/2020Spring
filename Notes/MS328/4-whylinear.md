@@ -16,11 +16,14 @@ Week 4 of 2020 Spring
 
 [toc]
 
+
+## 极大似然估计
+
+
 我们做最小二乘估计时, $\beta$的维度一般是解释变量$X$的维度加一.
 
 $$\underset{\beta \in \mathbb{R}^{p}}{\arg \min }(\mathbb{Y}-\mathbb{X} \beta)^{\top}(\mathbb{Y}-\mathbb{X} \beta)=\left(\mathbb{X}^{\top} \mathbb{X}\right)^{-1} \mathbb{X}^{\top} \mathbb{Y}$$
 
-## 极大似然估计
 
 ### Formulation
 
@@ -65,7 +68,7 @@ $$\begin{aligned}
 &=\arg \min _{\theta}-\prod_{i=1}^{n} f\left(X_{i}, \theta\right)=\arg \min _{\theta} \frac{1}{n} \sum_{i=1}^{n}-\log f\left(X_{i}, \theta\right)
 \end{aligned}$$
 
-如果$L(\theta_1)\leL(\theta_2)$, 那么$\theta_1$产生样本的可能性更大.
+如果$L(\theta_1)\le L(\theta_2)$, 那么$\theta_1$产生样本的可能性更大.
 
 ### Analysis
 
@@ -96,7 +99,7 @@ $$L\left(\beta, \sigma^{2}\right)=\prod_{i=1}^{n} \frac{1}{\sqrt{2 \pi} \sigma} 
 
 $$\arg \max _{\beta \in \mathbb{R}^{\rho}, \sigma^{2}} \frac{1}{(\sqrt{2 \pi} \sigma)^{n}} \exp \left\{-\frac{1}{2 \sigma^{2}}(\mathbb{Y}-\mathbb{X} \beta)^{\top}(\mathbb{Y}-\mathbb{X} \beta)\right\}$$
 
-如果只关注回归系数$\beta$部分
+如果只关注回归系数$\beta$部分
 
 $$\hat{\beta}=\arg \min _{\beta \in \mathbb{R}^{p}}(\mathbb{Y}-\mathbb{X} \beta)^{\top}(\mathbb{Y}-\mathbb{X} \beta)$$
 
@@ -104,6 +107,12 @@ $$\hat{\beta}=\arg \min _{\beta \in \mathbb{R}^{p}}(\mathbb{Y}-\mathbb{X} \beta)
 当噪音部分为正态分布时候，极大似然估计等价于最小二乘估计.
 
 > 思考: 如果噪音不是正态分布，例如对称均匀分布、对称指数分布等，极大似然估计的形式是什么样的？
+
+
+
+
+
+
 
 ### 指数噪音
 
@@ -242,8 +251,9 @@ $$\hat{f}(x)=\arg \min _{f} \frac{1}{n} \sum_{i=1}^{n}\left(Y_{i}-f\left(X_{i}\r
 
 如果对函数f ()不加任何限制，直观上
 - 得到的估计就为经过每一个观察值的任意函数曲线(如果出现Xi有重合的情形，估计函数应该经过平均值点)。
-- 这样得到的估计函数很多时候会非常扭曲，严重的过度拟合(over-tting, 在训练集上表现完美，但是测试集上可能让人失望).
+- 这样得到的估计函数很多时候会非常扭曲，严重的过度拟合(over-fitting, 在训练集上表现完美，但是测试集上可能让人失望).
 - 奥卡姆剃刀
+
 
 
 ### Penalized Regression
