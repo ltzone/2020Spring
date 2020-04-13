@@ -151,7 +151,7 @@ pros: 灵活,甚至可以内部切换代理 cons: 过度包装
   - Here our goal is to provide a simple abstraction for  a complex instantiation process. 
   - We want to make the system independent from the way its objects are created, composed and represented.
 
-
+## Structural Pattern
 
 ### Composite Pattern
 组合模式:动态树: Models tree structures that represent part-whole hierarchies with arbitrary depth and width. 
@@ -171,4 +171,520 @@ The Composite Pattern lets client treat individual objects and compositions of t
 
 ![](img/04-09-11-20-41.png)
 
+
+### Adapter
+
+适配器模式
+
+![](img/04-13-10-04-04.png)
+
+描述
+- ClientInterface定义了一些规格，但没有实现方法。（斜体*Request()*）
+- 需要一些子类进行实现
+- Adapter继承了ClientInterface的一些方法，但Adapter本身也没有提供具体的方法进行实现，而是让已存在的LegacyClass生成的对象干活。
+- **委派机制。delegation**
+- Adapter实现了接口上的转换，它向外界提供了一个标准的Request结构。**bind an Adapter and an Adaptee**
+- **Interface** inheritance is use to specify the interface of the **Adapter** class.
+- **Target** and **Adaptee** (usually called legacy system 遗留系统) _pre-exist_ the Adapter.
+
+主要作用：
+- 转换接口，使得类一起工作。
+- 提供新的接口（interface）。
+- also known as wrapper（包装器）
+- 实际中还有两种类别：
+  - class adapater：
+    使用多重继承，adapt one interface to another
+  - object adapter：
+    单继承+委派机制
+
+例子1：
+一个超市营业系统，计算税率可能不是商业软件自身的一个模块，每做一次交易我们需要调用第三方提供的税率计算服务。
+
+![](img/04-13-10-13-19.png)
+对于新来的第三方服务，只要我们的adapter是继承自标准接口interface的，系统内部就不需要对算税功能重写。
+
+例子2：
+一个财务管理系统，定义标准接口，针对不同的财务软件，开发adapter，提供标准接口。
+![](img/04-13-10-14-19.png)
+![](img/04-13-10-14-28.png)
+比如，我们选择SAP系统（存在一些API），利用Adapter对接。我们可以在类的名称中加上Adapter的名字。
+![](img/04-13-10-16-20.png)
+
+
+### Bridge
+桥接模式。比Adapter更复杂。定义：_decouple an **abstraction** from its **implementation** so that the two can vary independently_
+
+实现图：
+
+![](img/04-13-10-17-28.png)
+
+描述：
+- implementator这边，有一个接口定义（抽象），底下有具体的实现方式A/B。
+- Abstraction这边，定义了不同的实现，Refined A/B。
+- 他们之间建立了一个**composition**关系的桥梁。即concrete A/B生成的对象都是Abstraction的组成部分，它们是abstrction中operation的**套路**的组成部分。
+
+功能：相同接口上的不同实现。
+
+例子：画图
+
+首先我们有implementation上的实现
+```java
+/** "Implementor" */
+interface DrawingAPI {
+    public void drawCircle(double x, double y, double radius); }
+ 
+/** "ConcreteImplementor"  1/2 */
+class DrawingAPI1 implements DrawingAPI {
+   public void drawCircle(double x, double y, double radius) {
+        System.out.printf("API1.circle at %f:%f radius %f\n", x, y, radius);
+   }  }
+/** "ConcreteImplementor" 2/2 */
+class DrawingAPI2 implements DrawingAPI {
+   public void drawCircle(double x, double y, double radius) {
+        System.out.printf("API2.circle at %f:%f radius %f\n", x, y, radius);
+   } }
+```
+
+接下来我们定义abstraction
+
+```java
+/** "Abstraction" */
+abstract class Shape {
+   protected DrawingAPI drawingAPI;
+   protected Shape(DrawingAPI drawingAPI){
+      this.drawingAPI = drawingAPI;  }
+   public abstract void draw();                             // low-level
+   public abstract void resizeByPercentage(double pct);     // high-level 
+}
+/** "Refined Abstraction 1/2" */
+// 套路1： 画两个同心圆
+class TwoCircleShape extends Shape {
+   private double x, y, radius;
+   public TwoCircleShape(double x, double y, double radius, DrawingAPI drawingAPI) {
+      super(drawingAPI);
+      this.x = x;  this.y = y;  this.radius = radius;  }
+   // low-level i.e. Implementation specific
+   public void draw() {
+        drawingAPI.drawCircle(x, y, radius);
+        drawingAPI.drawCircle(x, y, 2*radius);}
+   // high-level i.e. Abstraction specific
+   public void resizeByPercentage(double pct) {
+        radius *= pct; }}
+
+/** "Refined Abstraction" 2/2*/
+class OneCircleShape extends Shape {
+   private double x, y, radius;
+   public OneCircleShape(double x, double y, double radius, DrawingAPI drawingAPI) {
+      super(drawingAPI);
+      this.x = x;  this.y = y;  this.radius = radius;  }
+   // low-level i.e. Implementation specific
+   public void draw() {
+        drawingAPI.drawCircle(x, y, radius);
+       }
+   // high-level i.e. Abstraction specific
+   public void resizeByPercentage(double pct) {
+        radius *= pct; }}
+
+class BridgePattern {
+   public static void main(String[] args) {
+       Shape[] shapes = new Shape[] {
+           // API1画红色圆，API2画蓝色圆
+           new TwoCircleShape(1, 2, 3, new DrawingAPI1()),
+           new TwoCircleShape(5, 7, 11, new DrawingAPI2()),
+           new OneCircleShape(5, 7, 11, new DrawingAPI1()),
+           new OneCircleShape(1, 2, 3, new DrawingAPI2()),
+       };
+ 
+       for (Shape shape : shapes) {
+           shape.resizeByPercentage(2.5);
+           shape.draw();
+       }
+   }
+}
+```
+
+
+### Adapter vs Bridge
+Similarities:
+- Both are used to hide the details of the underlying implementation.
+- 通过抽象类、中间对象，隐藏了功能的实现
+Difference:
+- The adapter pattern is geared towards making unrelated components work together 原来两个component不能一起工作，通过中间层一起工作
+  - Applied to systems after they’re designed (**reengineering, interface engineering**). 
+- A bridge, on the other hand, is used up-front in a design to let abstractions and implementations vary independently. 从某种角度来说，它是特意被设计的，我们希望系统未来会非常具有扩展性
+  - **Green field engineering** of an “extensible system” 
+  - New “beasts” can be added to the “object zoo”, even if these are not known at analysis or system design time.
+
+> A bridge is by design.（故意为之） An adaptor is not.（迫不得已） An adaptor is a patch.（打补丁） A bridge is put in place on purpose.
+
+
+### Facade
+![](img/04-13-10-27-36.png)
+原有系统一团乱麻，我们希望开发的系统要利用已有的系统，但我们不希望把内部系统全部研究透，暴露出来。
+我们定义一个Facade（外交部、销售部），专门用于调用内部的类。
+Facades allow us to provide  a closed architecture（封闭结构）
+
+
+“Bad” Example：
+- “Ravioli Design” 效率高但可能abuse。不能指望sub1完全了解sub2的工作原理。
+- ![](img/04-13-10-31-04.png)
+
+Implmentation Example
+
+Our application will have the following classes: _Customer, Bank, AddressVerifier, SalaryVerifer._ 我们希望设计一个系统验证用户信息。
+
+“Ravioli Design” 需要我们详细了解银行已有软件功能。
+```java
+Customer c = new Customer();
+AddressVerifier objAddressVerifier = new AddressVerifier();
+// 银行提供的地址验证API
+bool isAddressVerified=objAddressVerifier.HasProperAddress(c);
+// 调用方法，验证对象
+ 
+// 如法炮制，验证工资
+FinanceVerifier objFinanceVerifier = new FinanceVerifier();
+bool hasGoodSalary = objFinanceVerifier.HasGoodSalary(c);
+// 如法炮制，还有其他的贷款，也一并验证
+bool hasAnyOtherLoan = objFinanceVerifier.HaveAnyOtherLoan(c);
+
+if(isAddressVerified && hasGoodSalary && !hasAnyOtherLoan)
+{
+   Console.WriteLine("Loan Approved");
+}
+else
+{
+   Console.WriteLine("Loan Rejected");
+} // The Client code has become very complex.
+```
+能否简化？facade模式。代码不变，但将`doApplicableForLoan`做封装
+```java
+public class LoanFascade
+{
+   public bool doApplicableForLoan(Customer c)
+   {
+     AddressVerifier objAddressVerifier = new AddressVerifier();
+     bool isAddressVerified = objAddressVerifier.HasProperAddress(c);
+     FinanceVerifier objFinanceVerifier = new FinanceVerifier();
+      bool hasGoodSalary = objFinanceVerifier.HasGoodSalary(c);
+      bool hasAnyOtherLoan = objFinanceVerifier.HaveAnyOtherLoan(c);
+     return (isAddressVerified && hasGoodSalary && !hasAnyOtherLoan);
+   }
+}// Client Code
+Customer c = new Customer();
+LoanFascade objLoanFascade=new LoanFascade();
+if(objLoanFascade.doApplicableForLoan(c))
+{    Console.WriteLine("Loan Approved");  }
+else
+{   Console.WriteLine("Loan Rejected"); }
+```
+
+
+### Subsystem Design with Façade, Adapter, Bridge
+三招联合起来
+
+理想系统：
+- **interface** object：代表系统与外界交互
+- a set of **application domain objects** (entity objects) modeling real entities or existing systems 用于完成功能的类
+- one or more  **control objects**
+
+We can use design patterns to realize this subsystem structure
+- Realization of the Interface Object: Facade
+  - Provides the interface to  the subsystem
+  - 组合功能，对外提供接口
+- Interface to existing systems: Adapter or Bridge
+  - Provides the interface to  existing system (legacy system)
+  - The existing system is not necessarily object-oriented! 
+
+
+### Proxy
+代理模式
+
+Motivation：
+- 网速太慢，我们想看新闻文字，视频图片先不下载也没关系。
+
+Problem: EXPENSIVE COMPUTATION
+- 最消耗资源的过程一般是object creation, object initialization. 特别是在使用网络传输大量数据的情况下。
+- 有时候我们可能并不需要真正的对象出来，就可以完成功能。（请替身Proxy出来先做一些不紧要的事情）。
+- real object只有在用户真正需要的时候才出来
+
+![](img/04-13-10-45-27.png)
+
+功能分类：
+- Remote Proxy
+  - 真正的信息在网络的另一端，传输需要花费一些时间
+  - Local representative for an object in a different address space 在本地设置Proxy
+  - Caching of information: Good if information does not change too often，Proxy的功能可以是存有缓存，看看信息够不够，不够再更新。
+- Virtual Proxy
+  - 一个统称，生成对象的代价比较高
+  - Object is too expensive to create or too expensive to download
+- Protection Proxy
+  - 需要什么功能，先请出proxy，过滤功能
+  - 如果是真的需要，再请出真正对象
+  - Proxy provides **access control** to the real object
+  - Useful when different objects should have different access and viewing rights for the same document. 
+  - Example: Grade information for a student shared by administrators, teachers and students.
+
+
+例子：
+![](img/04-13-10-59-31.png)
+
+- Images are stored and loaded separately from text
+- If a RealImage is not loaded a ProxyImage displays a grey rectangle in place of the image
+- The client cannot tell that it is dealing with a ProxyImage instead of a RealImage
+- A proxy pattern **can be easily combined with a Bridge**
+
+
+## Behavioral Pattern
+行为模式，我们选择了三个代表性的模式
+
+### Strategy
+策略模式
+
+Motivation：
+- 现实中，针对一个task（如排序，字符串分解，编译等），我们有多种实现方式
+- 我们针对不同的实现有trade-off的考量
+- 很可能，我们在原型时期写一个算法，未来再调整一个算法
+
+![](img/04-13-11-03-34.png)
+如，去机场这件事，有很多方案可选，依据不同的选择条件，我们选择不同的方式。（不同的实现方式是聚合的关系）
+
+![](img/04-13-11-04-37.png)
+- Strategy定义算法的接口，下面是具体的实现（继承）
+- 还有一个Context接口，将Strategy对象进行聚合。
+- Policy对象告诉我们在什么样的Context下选用什么样的Strategy
+
+例子：出行
+
+![](img/04-13-11-06-21.png)
+
+例子：
+假设鹅厂推出了3种会员，分别为会员，超级会员以及金牌会员，还有就是普通玩家
+针对不同类别的玩家，购买《王者农药》皮肤有不同的打折方式，并且一个顾客每消费10000就增加一个级别，那么我们就可以使用策略模式
+
+我们希望，不管什么级别，算钱归算钱，不要算钱的时候判断你是谁。
+
+首先要有一个计算价格的策略接口
+```java
+public interface CalPrice { //根据原价返回一个最终的价格 
+Double calPrice(Double orgnicPrice);
+ }
+```
+不同级别的算钱实现是不同的，这些都是策略对象，都具有接口
+```java
+public class Orgnic implements CalPrice {
+public Double calPrice(Double orgnicPrice) {
+        return orgnicPrice;
+    }
+}
+
+public class Vip implements CalPrice {
+public Double calPrice(Double orgnicPrice) {
+        return orgnicPrice * 0.9;
+    }
+}
+
+public class SuperVip implements CalPrice {
+public Double calPrice(Double orgnicPrice) {
+        return orgnicPrice * 0.8;
+    }
+}
+
+public class GoldVip implements CalPrice {
+public Double calPrice(Double orgnicPrice) {
+        return orgnicPrice * 0.7;
+    }
+}
+```
+
+Context类就是Player
+```java
+public class Player {
+    private Double totalAmount = 0D;//客户在鹅厂消费的总额
+    private Double amount = 0D;//客户单次消费金额
+    private CalPrice calPrice = new Orgnic();
+    //每个客户都有一个计算价格的策略，初始都是普通计算，即原价
+
+    //客户购买皮肤，就会增加它的总额
+    public void buy(Double amount) {
+        this.amount = amount;
+        totalAmount += amount;
+        if (totalAmount > 30000) {//30000则改为金牌会员计算方式
+            calPrice = new GoldVip();
+        } else if (totalAmount > 20000) {//类似
+            calPrice = new SuperVip();
+        } else if (totalAmount > 10000) {//类似
+            calPrice = new Vip();
+        }
+    }
+
+    //计算客户最终要付的钱
+    public Double calLastAmount() {
+        return calPrice.calPrice(amount);
+    }
+}
+```
+
+这样Client级别的代码就会轻松很多，选择的事情交给了Player的Context对象。
+```java
+public class Client {
+    public static void main(String[] args) {
+        Player player = new Player();
+        player.buy(5000D);
+        System.out.println("玩家需要付钱：" + player.calLastAmount());
+        player.buy(12000D);
+        System.out.println("玩家需要付钱：" + player.calLastAmount());
+        player.buy(12000D);
+        System.out.println("玩家需要付钱：" + player.calLastAmount());
+        player.buy(12000D);
+        System.out.println("玩家需要付钱：" + player.calLastAmount());
+    }
+}
+```
+
+### Observer
+一个对象变了，其他相关的对象都要收到通知，进行更新。
+Define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified and updated automatically
+**Also called “Publish and Subscribe”**
+
+例子：拍卖
+![](img/04-13-11-14-01.png)
+
+实现例子：发布与订阅
+
+![](img/04-13-11-15-17.png)
+- 具体的Observer对象都具有update操作，用来接收消息。
+
+![](img/04-13-11-16-07.png)
+- aFile是发布者，具有一个订阅者列表，这个列表允许报名者动态加入，且发布者的代码，工作流程不希望任何修改
+- anInfo和alistView都是observer，向发布者发送attach加入订阅者名单
+- aFile调用notify方法通知自己，
+- 接下来开始对所有infoView对象发送update消息。
+
+Concrete Example：股票市场
+
+- The observers are different classes which display the latest stock quotes to the user.
+- Let us have classes representing the subject/observer relationship: the StockMarket class being the subject, and we have three different observer classes: GoogleStockGadget, YahooStockGadget, and MSNStockGadget.
+
+
+首先定义发布者接口、Observer接口
+```java
+public interface Subject
+{
+  public void register(Observer o);
+  public void unregister(Observer o);
+  public void notify();
+}
+
+public interface Observer
+{
+    public void update(int value);
+}
+```
+
+StockMarket是具体的Subject类。
+```java
+public class StockMarket : Subject
+{  // A Collection to keep track of all Registered Observers
+  ArrayList observers = new ArrayList();
+  // Stores latest stock quote (example is purposely simplistic)
+  int newValue = 0;
+  
+  public void setValue(int v)
+  {  newValue = v;  }
+  
+  public void register(Observer o)
+  { observers.add(o);  }
+
+  public void unregister(Observer o)
+  {  int i = observers.indexOf(o);
+    observers.remove(i);  }
+```
+
+notify就是遍历名单，取出对象，调用对象的update方法
+```java
+public void notify()
+  {
+    for (int i=0;i < observers.size();i++)
+    {
+      Observer ob = (Observer)observers.get(i);
+      ob.update(newValue);
+    }
+  }
+}
+```
+
+我们有各式各样的Observer，比如对GoogleObserver，我们实现对应的Update方法，在构造函数中，我们要调用注册方法。
+```java
+public class GoogleStockGadet : Observer
+{
+   int latestValue = 0;
+   Subject stockMarket; // Subject reference variable
+ 
+public GoogleStockGadet(Subject subject)
+   { stockMarket = subject;
+    stockMarket.register(this); 
+// Registering itself to the Subject }
+
+   public void update(int value)
+   { latestValue = value;
+    display(); }
+
+   public void display()
+   {
+     System.out.println("Latest Quote=" + latestValue);
+   }
+
+   public void unsubscribe()
+   {
+     stockMarket.unregister(this);
+   }
+}
+```
+  
+Main函数写作如下：
+```java
+public class MainProgram
+{
+  public static void Main(string[] args)
+  {
+    //Initialize Subject
+    StockMarket stockMarket =  new StockMarket();
+    int latestQuote = 0;
+
+    // Initialize Gadgets..Note the subject being passed in Constructor
+    GoogleStockGadget googleGadget = new GoogleStockGadget(stockMarket);
+    MSNStockGadget msnGadget =  new MSNStockGadget(stockMarket);
+    YahooStockGadget yahooGadget = new YahooStockGadget(stockMarket);
+
+    // Code for Getting latest stock 
+    // ....
+    // ....
+    stockMarket.setValue(latestQuote);
+    // Updating all Registered Observers
+    stockMarket.notify();
+    //GoogleGadget decides to unregister/unsubscirbe
+    googleGadget.unsubscribe();
+
+  }
+}
+```    
+发布订阅模式实现了消息的广泛传播，因为它使得消息的发布方不需要知道消息的接收方类型/具体的实现方式，因为他们都是具有update方法的对象。**实现解耦**
+
+
+
+### Command
+
+Motivation：
+如Windows的文件菜单中：有打开、保存、另存为等操作，根据软件的不同，相同的menus（button是一样的），**会挂接不同的功能**。
+即：to make the **user interface reusable** across many applications。
+我们希望把软件的interface做的更加可扩展，用于其他重用。
+- 比如：Undo和Redo可以在更加抽象的层面实现，用队列记录功能和参数的track和undo的操作。**把功能对象放进列表里**。
+Such a **menu** can easily be implemented with the **Command** Pattern。
+
+![](img/04-13-11-29-36.png)
+通过上文，我们识别出了**功能类**的概念，功能类都有`execute`这个接口。
+
+- **Client** creates a **ConcreteCommand** and binds it with a Receiver.
+- **Client** hands the **ConcreteCommand** over to the **Invoker** which stores it.
+- The **Invoker** has the responsibility to do the command (“execute” or “undo”).
 
