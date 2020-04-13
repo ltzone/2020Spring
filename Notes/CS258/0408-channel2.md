@@ -185,7 +185,7 @@ $$
 \begin{aligned}
 A_{\epsilon}^{(n)}=\left\{\left(x^{n}, y^{n}\right) \in X^{n} \times Y^{n}:\right.&-\frac{1}{n} \log p\left(x^{n}\right)-H(X) |<\epsilon \\
 &\left|-\frac{1}{n} \log p\left(y^{n}\right)-H(Y)\right|<\epsilon \\
-\left.\left|-\frac{1}{n} \log p\left(x^{n}, y^{n}\right)-H(X, Y)\right|<\epsilon\right\}
+&\left.\left|-\frac{1}{n} \log p\left(x^{n}, y^{n}\right)-H(X, Y)\right|<\epsilon\right\}
 \end{aligned}
 $$
 我们要求, 典型集元素要求满足单个元素在典型集中, 合起来看也要在典型集不等式中.
@@ -197,8 +197,9 @@ $$
 - $\operatorname{Pr}\left(\left(X^{n}, Y^{n}\right) \in A_{\epsilon}^{(n)}\right) \rightarrow 1 \text { as } n \rightarrow \infty$
 - $\left|A_{\epsilon}^{(n)}\right| \leq 2^{n(H(X, Y)+\epsilon)}$ 证明类似单个随机变量的AEP
 - $\left|A_{\epsilon}^{(n)}\right| \geq (1-\epsilon) 2^{n(H(X, Y)-\epsilon)}$ 证明类似单个随机变量的AEP
-- $&\text { If }\left(\tilde{X}^{n}, \tilde{Y}^{n}\right) \sim p\left(x^{n}\right) p\left(y^{n}\right), \text { then }$ (即对典型集中特殊的$X_n,Y_n$, 上下界用互信息衡量, 而不是熵)
-$$(1-\epsilon) 2^{-n(I(X, Y)+3 \epsilon)} \leq \operatorname{Pr}\left(\left(\tilde{X}^{n}, \tilde{Y}^{n}\right) \in A_{\epsilon}^{(n)}\right) \leq 2^{-n(I(X, Y)-3 \epsilon)}$$
+- $\text { If }\left(\tilde{X}^{n}, \tilde{Y}^{n}\right) \sim p\left(x^{n}\right) p\left(y^{n}\right), \text { then }$ 
+  $$(1-\epsilon) 2^{-n(I(X, Y)+3 \epsilon)} \leq \operatorname{Pr}\left(\left(\tilde{X}^{n}, \tilde{Y}^{n}\right) \in A_{\epsilon}^{(n)}\right) \leq 2^{-n(I(X, Y)-3 \epsilon)}$$
+  (即对典型集中特殊的$X_n,Y_n$, 上下界用互信息衡量, 而不是熵)
 
 我们主要证明第三个性质.
 定义展开, 根据典型集大小放缩. 右侧得证
