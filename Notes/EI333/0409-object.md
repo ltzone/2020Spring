@@ -687,4 +687,241 @@ Such a **menu** can easily be implemented with the **Command** Pattern。
 - **Client** creates a **ConcreteCommand** and binds it with a Receiver.
 - **Client** hands the **ConcreteCommand** over to the **Invoker** which stores it.
 - The **Invoker** has the responsibility to do the command (“execute” or “undo”).
+- **Receiver**类似按钮, 绑定特定的功能类.
 
+Example:
+比如,我们需要设置一个控制器, 用On和Off分别控制不同家电的开关.
+![](img/04-16-10-05-55.png)
+已有的方法:
+![](img/04-16-10-07-15.png)
+**方法1:** 直接用switch case分支判断.
+需要改进的地方? 可扩展性?控制多个电器?
+**方法2:** 把电器的开关封装成各自的类, 使用强制类型转换, 问题:代码修改,效率低下.
+**方法3:**
+- 在考虑如何封装之前，我们假设已经有一个类，把它封装起来了，这个类叫做Command
+- 因为它要封装各个对象的方法，所以，它应该(只)暴露出一个方法，这个方法既可以代表 `light.TurnOn()`，也可以代表`fan.Start()`，还可以代表`door.Open()`，我们给这个方法起个名字，叫做Execute()。
+- 现在我们有了Command类，还有了一个通用的Execute()方法，现在，我们修改PressOn()方法，让它通过这个Command类来控制电器(调用各个类的方法)。
+
+![](img/04-16-10-16-55.png)
+- Command前面加一个I, 特指这是Interface
+- 针对不同电器都有不同的功能子类, **(委派模式)** 调用Light和Fan对应功能.
+- 工作流程:
+  ![](img/04-16-10-18-22.png)
+
+示例代码:
+```java
+// 定义Command接口
+public interface ICommand {
+void Execute();}
+
+public class AirOnCommand : ICommand {
+  AirCondition airCondition;
+  public AirOnCommand(AirCondition airCondition) {
+    this.airCondition = airCondition;
+  }
+  public void Execute() {  //注意，你可以在Execute()中添加多个方法
+    airCondition.Start();
+    airCondition.SetTemperature(16);
+  }
+}
+ // 定义关空调命令
+public class AirOffCommand : ICommand {
+  AirCondition airCondition;
+  public AirOffCommand(AirCondition airCondition) {
+    this.airCondition = airCondition;
+  }
+  public void Execute() {
+    airCondition.Stop();
+  }
+}
+
+// 定义遥控器
+public class ControlPanel {
+  private ICommand onCommand;
+  private ICommand offCommand;
+  public void PressOn() {
+    onCommand.Execute();
+  }
+  public void PressOff() {
+    offCommand.Execute();
+  }
+  public void SetCommand(ICommand onCommand, ICommand offCommand) {
+    this.onCommand = onCommand;
+    this.offCommand = offCommand;
+  }
+}
+
+class Program {
+  static void Main(string[] args) {
+    ControlPanel panel = new ControlPanel(); // 创建遥控器对象
+    AirCondition airCondition = new AirCondition();  //创建空调对象
+    // 创建Command对象，传递空调对象
+    ICommand onCommand = new AirOnCommand(airCondition);
+    ICommand offCommand = new AirOffCommand(airCondition);
+    // 设置遥控器的Command
+    panel.SetCommand(onCommand, offCommand);
+    panel.PressOn();      //按下On按钮，开空调，温度调到16度
+    panel.PressOff();     //按下Off按钮，关空调
+    }
+}
+```
+
+
+Control Panel定义好后,就不需要修改代码, 我们程序只需要定义新的onCommand和offCommand对象即可, 当我们需要修改控制方法时, 我们就把对应的参数传入SetCommand,即可改变onCommand和offCommand操作的对象.
+
+Analysis
+- “Encapsulate a request as an object, thereby letting you
+  - 一般来说, 面向对象方法中的类一般具有行为和数据.
+  - 这里我们创建的类只有行为. 面向对象的方法在适当的时候实现了*面向功能的分解*
+  - 尽管一定程度上违背了面向对象的原则, 但有些情况下十分有用
+  - parameterize clients with different requests,
+  - queue or log requests, and 
+  - support undoable operations.” 
+- Uses:
+  - Undo queues
+  - Database transaction buffering: 数据库有许多表构成, 我们可能需要对表做一连串不同的操作, 我们最好需要在执行一系列的操作过程中, 保证操作的连续性(in case of停电等意外), 因此database一般提供了transaction指令, 即保证一个transaction要么全部执行,要么全部不执行. 这样每一个修改都可以看做command对象, 支持undo.
+
+
+## Creational Pattern
+对象从哪里来. 构造函数的生成逻辑?
+
+### Abstract Factory
+Recall: Class是Object的工厂. 现在我们加上Abstract后,表明工厂也可以被模板化.
+
+Motivation: 让前端适配不同的用户界面, 与类似的**一群成套**的设备功能连接起来, 与设备本身是独立的.
+
+![](img/04-16-10-35-13.png)
+
+![](img/04-16-10-36-27.png)
+- 比方说, 我们知道我们的系统包含两部分, ProductA和ProductB
+- 而且一般创建时要先有A再有B.
+- 这个复杂对象中的组成部分却是可以由不同的厂商提供的.A1通常和B1组合在一起, A2通常和B2组合在一起.
+- 这样, 返回的ConcreteFactory就是一个成套的产品
+- Client是不需要关心到底是有哪一套系统组成的
+
+应用
+- 分离功能与实现
+- 生产商的独立性
+- 为相关部件加上限制
+- 扩展性(快速适应新产品系列)
+
+例子
+![](img/04-16-10-41-27.png)
+
+
+### Build Pattern
+创建者模式
+
+Motivation: 格式转换问题
+
+![](img/04-16-11-00-42.png)
+- Director决定使用哪一个Builder进行转换
+- 转换器遵循相同的接口, 因此Director都是一样的转换器.
+
+Example:RTF Builder
+![](img/04-16-11-02-20.png)
+- 无论用的是哪一个converter, 转换页码, 文字, 篇章的接口都是一样
+- 只需要传入一个converter对象, parser就能工作了.
+- 代码就具有普遍的适用性
+
+使用场景:
+- 创建过程需要一系列步骤,过程在director中定义, 总过程与各个子部分的完成方式是独立的. (创建子功能的a2,b1,c3对象)
+- 每一个步骤可能分多种情形组成, 根据实际需求进行变化
+
+
+### Abstract Factory vs Builder
+
+前者返回的是一整套套餐, 而Builder Pattern知道是套餐, 但每一部分都是可以定制的.
+
+Work Together? 可以相互嵌套, 不同的策略用不同的模式解决. multiple complex product
+
+
+
+## Summary for Design Pattern
+
+- Structural Patterns
+  - Focus: How objects are composed to form larger structures
+  - Problems solved:  
+    - Realize new functionality  from old functionality, 
+    - Provide flexibility and extensibility
+- Behavioral Patterns
+  - Focus: Algorithms and the assignment of responsibilities to objects
+  - Problem solved: 
+    - Too tight coupling to a particular algorithm 
+- Creational Patterns
+  - Focus: Creation of complex objects
+  - Problems solved: 
+    - Hide how complex objects are created and put together
+
+## Frameworks
+
+设计模式是知识层面的reuse, 而framework是可重用的半成品(如代码实现).
+A framework is a reusable partial application that can be specialized to produce custom applications. 
+
+适用于特定的application domain.
+
+The key benefits of frameworks are reusability and extensibility.
+- Reusability leverages of the application domain knowledge and prior effort of experienced developers 
+- Extensibility is provided by **hook methods** (暴露一些接口供用户自行实现, 此后framework会调用用户实现的方法) , which are overwritten by the application to extend the framework.
+
+Example 网页应用.
+
+![](img/04-16-11-25-58.png)
+
+### 分类
+
+Frameworks can also be classified by the techniques used to extend them.  根据功能
+- Whitebox frameworks
+  - 主要通过继承和绑定进行重用
+  - Extensibility achieved through inheritance and dynamic binding. 
+  - Existing functionality is extended by subclassing framework base classes and overriding predefined hook methods
+  - Often design patterns such as the template method pattern are used to override the hook methods. 也可以应用一些进阶的设计模式
+- Blackbox frameworks
+  - 不需要原来framework的代码, 只需要简单插入component进行扩展.
+  - Extensibility achieved by defining interfaces for components that can be plugged into the framework. 
+  - Existing functionality is reused by defining components that conform to a particular interface 
+  - These components  are integrated with the framework via delegation.
+
+
+根据面向开发者
+- **Infrastructure frameworks** aim to simplify the software development process
+  - System infrastructure frameworks are used internally within a software project and are usually not delivered to a client. 
+- **Middleware frameworks** are used to integrate existing distributed applications and components. 
+  - Examples: MFC, DCOM, Java RMI, WebObjects, WebSphere, WebLogic Enterprise Application [BEA].
+- **Enterprise application** frameworks are application specific and focus on domains
+  - Example domains:  telecommunications, avionics, environmental modeling, manufacturing, financial engineering, enterprise business activities.
+
+### Class libraries and Frameworks
+虽然都是重用,但
+- Class Libraries: 
+  - Less  domain specific 更通用
+  - Provide a smaller scope of reuse. 范围更小
+  - Class libraries are passive; no constraint on control flow. 只能使用,永远不可能自行运行
+- Framework: 
+  - Classes cooperate for a family of related applications. 整体功能
+  - Frameworks are active; affect the flow of control. 往往本身就可运行
+- In practice, developers often use both:
+  - Frameworks often use class libraries internally to simplify the development of the framework. 
+  - Framework event handlers use class libraries to perform basic tasks (e.g. string processing, file management, numerical analysis…. )
+
+### Components and Frameworks
+
+- Components
+  - Self-contained instances of classes
+  - Plugged together to form complete applications.
+  - **Blackbox** that defines a cohesive set of operations, 
+  - Can be used based on the syntax and semantics of the interface. 
+  - Components can even be reused **on the binary code level**. (运行时)
+  - The advantage is that applications do not always have to be recompiled when components change. 
+- Frameworks:
+  - Often used to develop components
+  - Components are often plugged into blackbox frameworks. 
+
+
+## Summary
+- Object design is the process of **adding details** to the requirements analysis and **making implementation decisions**
+- Three ways to get new functionality: 
+  - Implementation inheritance
+  - Interface inheritance
+  - Delegation
+- Patterns explicitly capture expert knowledge and design tradeoffs, and make this expertise more widely available.
