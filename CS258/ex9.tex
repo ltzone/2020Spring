@@ -1,0 +1,165 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%    EXERCISE 1   %%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exercise}[Channel with two independent looks at $Y$]{ Let $Y_{1}$ and $Y_{2}$ be conditionally independent and conditionally identically distributed given $X$
+  \begin{enumerate}
+    \item Show that $I\left(X ; Y_{1}, Y_{2}\right)=2 I\left(X ; Y_{1}\right)-I\left(Y_{1} ; Y_{2}\right)$
+    \item Conclude that the capacity of the channel $X\mapsto Y_1,Y_2$ is less than twice the capacity of the channel $X \mapsto Y_1$.
+  \end{enumerate}}
+  \begin{proof}
+  \par{~}
+  \begin{enumerate}
+    \item {
+      \begin{equation}
+        \begin{aligned}
+          I(X;Y_1,Y_2) &= H(Y_1,Y_2) - H(Y_1,Y_2|X) \\
+          &= H(Y_1,Y_2) - H(Y_1|X) - H(Y_2|X) \\
+          &= H(Y_1) + H(Y_2) - I(Y_1;Y_2) -  H(Y_1|X) - H(Y_2|X) \\
+          &=I(X;Y_1) + I(X;Y_2)- I(Y_1,Y_2) \\
+          &= 2I(X;Y_1) - I(Y_1,Y_2)
+        \end{aligned}
+      \end{equation}
+     }
+    \item { 
+\begin{equation}
+  \begin{aligned}
+    C_1 &= \max_{p(x)} I(X;Y_1,Y_2) \\
+    &= \max_{p(x)} (2I(X;Y_1) - I(Y_1,Y_2)) \\
+    &\le \max_{p(x)} 2I(X;Y_1) \\
+    &= 2C_2
+  \end{aligned}
+\end{equation}
+    }
+  \end{enumerate}
+  \end{proof}
+  \label{ex1}
+\end{exercise}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%    EXERCISE 2   %%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exercise}[Two-look Gaussian channel]{ Given $X \mapsto Y_1,Y_2$. Consider the ordinary Gaussian channel with two correlated looks at ${X},$ that is, $Y=\left(Y_{1}, Y_{2}\right),$ where
+  $$
+  \begin{aligned}
+  Y_{1} &=X+Z_{1} \\
+  Y_{2} &=X+Z_{2}
+  \end{aligned}
+  $$
+  with a power constraint $P$ on $X,$ and $\left(Z_{1}, Z_{2}\right) \sim \mathcal{N}_{2}(0, K),$ where
+$$
+K=\left[\begin{array}{ll}
+N & N \rho \\
+N \rho & N
+\end{array}\right]
+$$
+Find the capacity $C$ for
+\begin{enumerate}
+  \item $\rho=1$
+  \item $\rho=0$
+  \item $\rho=-1$
+\end{enumerate}}
+  \begin{solution}
+  \par{~}
+  From Theorem 8.6.5 [Cover] we know that the Gaussian distribution maximizes the entropy over all distributions with the same variance. Hence it is clear that normally distributed $X \sim \mathcal{N}(0,P)$ will maximize the mutual information. In this case $(Y_1,Y_2) \sim \left(0, \left[\begin{array}{cc}
+    P+N & P+\rho N \\
+    P +\rho N & P + N
+  \end{array}\right]\right)$
+  \begin{equation}
+    \begin{aligned}
+      \max I(X;Y_1,Y_2) &= h(Y_1,Y_2) - h(Y_1,Y_2|X) \\
+      &= h(Y_1,Y_2) - h(Z_1,Z_2) \\
+      &= \frac{1}{2} \log \left(2\pi e\right)^2 \left|\begin{array}{cc}
+        P+N & P+\rho N \\
+        P +\rho N & P + N
+      \end{array} \right| - \frac{1}{2} \log \left(2\pi e\right)^2 \left| \begin{array}{ll}
+        N & N \rho \\
+        N \rho & N
+        \end{array}  \right| \\
+      &= \frac{1}{2} \log \left(1 + \frac{2P}{(1+\rho)N}\right)
+    \end{aligned}
+  \end{equation}
+  \begin{enumerate}
+    \item $\rho = 1$, $C = \frac{1}{2} \log \left(1 + \frac{P}{N}\right)$
+    \item $\rho = 0$, $C = \frac{1}{2} \log \left(1 + \frac{2P}{N}\right)$
+    \item $\rho = -1$, $C = +\infty$.
+  \end{enumerate}
+  \end{solution}
+  \label{ex2}
+\end{exercise}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%    EXERCISE 3   %%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exercise}[Output power constraint]{ Consider an additive white Gaussian noise channel with an expected output power constraint $P .$ Thus, $Y=X+Z, Z \sim N\left(0, \sigma^{2}\right), Z$ is independent of $X,$ and $E Y^{2} \leq P$ Find the channel capacity.}
+  \begin{solution}
+  \begin{equation}
+    \begin{aligned}
+      I(X;Y) &= h(Y) - h(Y|X) \\
+      &= h(Y) - h(Z) \\
+      &= h(Y) - \frac{1}{2}\log \left(2 \pi e \sigma^2\right) \\
+      &\le \frac{1}{2} \log \left( 2 \pi e P \right)  - \frac{1}{2}\log \left(2 \pi e \sigma^2\right)  \\
+      &= \frac{1}{2} \log \frac{P}{\sigma^2}
+    \end{aligned}
+  \end{equation}
+  The equailty holds when $Y$ is normally distributed. In this case $X \sim \mathcal{N} (0,P-\sigma^2)$.
+  \end{solution}
+  \label{ex3}
+\end{exercise}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%    EXERCISE 4   %%%%%%%%%%%%
+%%%%%%%%%%%%%                 %%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{exercise}[Exponential noise channels]{ $\quad Y_{i}=X_{i}+Z_{i},$ where $Z_{i}$ is i.i.d. exponentially distributed noise with mean $\mu$. Assume that we have a mean constraint on the signal (i.e., $E X_{i} \leq \lambda$ ). Show that the capacity of such a channel is $C=\log \left(1+\frac{\lambda}{\mu}\right)$}
+  \begin{proof}
+  \begin{equation}
+    \begin{aligned}
+      I(X;Y) &= h(Y) - h(Y|X) \\
+      &= h(Y) - h(Z)\\
+      &= h(Y) - \sum_i h(Z_i) \\
+      &\le \sum_i \left(h(Y_i) - h(Z_i)\right)
+    \end{aligned}
+  \end{equation}
+  The equailty holds when $Y_i$s are independent, which can be obtained if $X_i$s are independent. Hence we can only consider the channel for the input and output to be single-valued. Still, $I(X;Y) = h(Y) - h(Z)$ holds.
+
+  Note for exponentially distributed $Z$,
+  \begin{equation}
+    \begin{aligned}
+      h(Z) &= - \int_{0}^{+\infty} g(z) \ln  \frac{1}{\mu} e^{-\frac{z}{\mu}}  dz \\
+      &= - \int_{0}^{+\infty} g(z) \ln  \frac{1}{\mu}   dz - \int_{0}^{+\infty} g(z) \frac{z}{\mu}  dz \\
+      &= 1 + \ln \mu 
+    \end{aligned}
+  \end{equation}
+
+  Note that $EY = EX + EZ \le \lambda + \mu$.  For mean-value bounded $Y$, by Theorem 12.1.1 and Example 12.2.5 [Cover], the maximizing differential entropy is $h^{*}(Y) = 1 + \ln (\lambda + \mu)$, with distribution $p^{*}(y) = \frac{1}{\lambda + \mu} e^{- \frac{y}{\lambda + \mu}}$. Therefore
+  \begin{equation}
+    I(X;Y) \le \sum_{i=1}^{n} \left(\left(1 + \ln(\lambda + \mu)\right)- \left(1 + \ln(\mu)\right)\right) = n \ln \frac{\lambda + \mu}{\mu}
+  \end{equation}
+
+  The equailty holds when $X_i$ are independent with mean value $\lambda$ and $Y_i \sim \text{exp} \left(\frac{1}{\lambda+\mu}\right)$. We need to find such distribution for $X_i$. Since $X_i$ and $Z_i$ are independent and $Y_i = X_i + Z_i$, it follows that the characteristc functions hold the following relation.
+  \begin{equation}
+    \phi_Y (t) = \phi_X (t) \cdot \phi_Z(t)
+  \end{equation}
+  Therefore
+  \begin{equation}
+    \begin{aligned}
+      \phi_X (t) &= \frac{\phi_Y(t)}{\phi_Z(t)} \\
+      &= \frac{\left(1 - i(\lambda + \mu)t\right)^{-1}}{\left( 1 - i \mu t\right)^{-1}} \\
+      &= \frac{1}{\lambda + \mu} \frac{\left[\mu - i \mu (\lambda + \mu)t\right] + \lambda}{1 - i(\lambda + \mu)t} \\
+      &= \frac{\mu}{\lambda + \mu} + \frac{\lambda}{\lambda + \mu} \left(1 - i (\lambda + \mu)t\right)^{-1}
+    \end{aligned}
+  \end{equation}
+
+  The characteristc function above is a linear combination of two kinds of distribution. We can set every $X_i$ to be 0 with the probability of $\frac{\mu}{\lambda + \mu}$, and to be exponentially distributed with mean value $\lambda + \mu$ by the probability of $\frac{\lambda}{\mu + \lambda}$. Then the channel capacity $ n \ln \frac{\lambda + \mu}{\mu} $ can be obtained.
+
+  \end{proof}
+  \label{ex4}
+\end{exercise}
