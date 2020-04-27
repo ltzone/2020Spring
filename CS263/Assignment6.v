@@ -282,7 +282,7 @@ Module Task4.
     This is a multiple-choice problem. You should use an ascending Coq list to
     describe your answer, e.g. [1; 2; 3], [1; 3], [2]. *)
 
-Definition my_choice1: list Z := [2;3].
+Definition my_choice1: list Z := [1;2;3].
 (** [] *)
 
 (** **** Exercise: 2 stars, standard  *)
@@ -303,7 +303,7 @@ Definition my_choice1: list Z := [2;3].
     This is a multiple-choice problem. You should use an ascending Coq list to
     describe your answer, e.g. [1; 2; 3], [1; 3], [2]. *)
 
-Definition my_choice2: list Z := [2;3].
+Definition my_choice2: list Z := [1;3].
 (** [] *)
 
 End Task4.
