@@ -184,3 +184,90 @@ e  \space \tau \mapsto e' \space \tau
 $$
 
 $$E \in \text {EvalCxt }::=\square\space |\space E \space e\space | \space E\space  \tau \space | \space V \space E$$
+
+
+
+## Erasure
+
+We want to reason about the properties that are not related to $\Lambda\alpha$. We define erasure by induction on expression. (hide types from users).
+
+$$
+\begin{array}{l}
+\text{erase}(x) = x \\
+\text{erase}(\lambda x:\tau.e) = \lambda x. \text{erase}(e) \\
+\text{erase}(e_1 \space e_2) = \text{erase}(e_1) \space \text{erase}(e_2) \\
+\text{erase}(\Lambda \alpha.e) = \text{erase}(e) \\
+\text{erase}(e \space \tau) = \text{erase}(e) \\
+\end{array}
+$$
+
+**Theorem** (Erasure doesn't change the result of a program: v is a vlue):[Type Erasure]:
+if $e \mapsto^{*} v$, then $\text{\text{erase}}(e) \mapsto^{*} \text{erase}(v)$.
+
+First question: which semantics do we need?
+
+### CBN
+
+A CBN Fix for $\Lambda \alpha.e$ stops evaluating: add a premise that "if $\Theta , \cdot \vdash e: \tau$ and $\tau \neq \forall \alpha.\tau$".
+
+Otherwise, a counter example
+$$\text{erase}(\Lambda \alpha.(\lambda x.x)(\lambda x.x)) =(\lambda x.x)(\lambda x.x)$$
+
+
+### CBV
+
+Recall $\Omega \mapsto \Omega$.
+a counter example: $\text{erase} ((\lambda x. 1) (\Lambda\beta.\Omega)) = (\lambda x. 1) (\Omega)$ is no longer a value!
+
+### Refined erasure
+
+add a dummy $\lambda$
+$$
+\begin{array}{l}
+\text{erase}(x) = x \\
+\text{erase}(\lambda x:\tau.e) = \lambda x. \text{erase}(e) \\
+\text{erase}(e_1 \space e_2) = \text{erase}(e_1) \space \text{erase}(e_2) \\
+\text{erase}(\Lambda \alpha.e) = \lambda x. \text{erase}(e) \quad (x \notin FV(e)) \\
+\text{erase}(e \space \tau) = \text{erase}(e) \\
+\end{array}
+$$
+
+
+
+## STLC VS SYSTEM-F
+
+两种系统都定义了syntax, operational semantics(CBN,CBV), type inference.
+
+补充一点 curry-howard iso.
+
+proof system v.s. type system
+prop         v.s. type
+proof        v.s. program
+proof rule   v.s. language constructor
+
+P /\ Q : Prop       v.s. A * B : Type
+conj H1 H2: P /\ Q  v.s. (x, y) : A * B
+
+P -> Q : Prop               v.s. A -> B : Type
+fun H ==> ... H ..: P -> Q  v.s. fun x => ... x ... : A -> B
+
+典型的同构对应关系
+```
+/\, \/, True, False, ->
+*, +, unit, void, ->
+```
+
+In System-F: 类型多了一个Forall，`forall x:A, X`
+
+问题来了：
+1. `LAMBDA tau. lambda x:tau. x`的类型是`forall tau, tau -> tau`。Q1:但在Coq中的写法是`(forall tau:Prop, tau -> tau):Prop`。两个`Prop`一样吗？Yes。
+
+2. `@nil : forall A:Type, list A`,`@cons: forall A: Type, A -> list A -> list A`.但`(forall A:Type, list A):Type`。Q2： 两个Type一样吗？Not necessary。
+
+### Insights
+
+Type World: predicative，不能在一个type中quantify all types(sets)。类似集合论中，不能有包含自己的集合（罗素悖论）。（Hint: universe inconsiistency，Coq内部是会动态分配继承机制的）
+
+Prop World：impredicative（within one proposition， quantify over all proposition）奇怪之处，可以带入本身。`(forall tau:Prop, tau -> tau) -> (forall tau:Prop, tau -> tau)`.
+
+Prop World这个系统成立的原因，就是System-F。我们可以认为这个同构保持一致性。
