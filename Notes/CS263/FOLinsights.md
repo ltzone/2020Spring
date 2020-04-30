@@ -1,5 +1,5 @@
 ---
-title: 【Programming Language】
+title: 【Programming Language】Completeness of FOL
 url: pl-fol
 date: 2020-04-28 14:04:23
 tags: 
@@ -260,6 +260,58 @@ RoadMap
 
 最后，case a保证了witness。
 
+
+## Canonical Model Construction and Truth Lemma
+
+> 我们主要关注一阶逻辑的符号层面的证明，不关心论域、函数、关系符号的解释（只要有一种满足即可）
+> 对比程序逻辑推导的霍尔逻辑，+、-、*等函数符号应该是有论域解释的。
+
+如何构造解释（构造对应的论域、~~函数~~、关系符号、自由变元），使得有witness的最大一致集在该解释之上可满足。
+
+### Constructing the domain
+First, we claim that the pairs of variables `x, y` such that `x == y` is a proposition in Gamma forms an equivalent relation.
+1. `x==x`，一定在Gamma中（极大一致集），不然加进去之后推出矛盾
+2. `x==y`推出`y==x`，利用极大一致性。
+3. 传递性类似的，利用极大一致性。（即Gamma内能推出的命题一定在Gamma内）
+Then, we define the domain D to be the equivalent classes of this relation. 构造的论域就定义为所有自由变元的一个等价类。即论域中的每个元素都是原来逻辑中自由变元的一个子集（论域是一个集合的集合）。
+
+### Constructing the relation symbol's interpretation
+We define the relation symbol `PRel`'s interpretation `Rel` as follows. Suppose `x*` and `y*` are two equivalent classes in the domain `D`取出等价类的代表元. The pair `x*`, `y*` is an element of Rel if and only if `PRel x y` is a proposition in Gamma. Here `x` and `y` represent elements of `x*` and `y*`.
+
+注意：任选出来结果还是一样的，因为It is critical that Rel is well defined. In fact, if `x1 == x2`, `y1 == y2` and `PRel x1 y1` are elements of Gamma, `PRel x2 y2` must be its element too.
+
+### Constructing variables' interpretation
+每个变元对应哪一个论域中的对象？直接对应等价类。We simply let La be the function that La(x) = x*. Here, x* represents the equivalent class in D such that x is in it.
+
+### Truth lemma
+
+原结论，在Gamma中的都为真，我们证明一个更强的结论，且不在Gamma中的都不为真。（iff）
+
+We prove by induction over P's syntax tree that P is an element of Gamma if and only if J = (D, Rel, La) satisfies P.
+
+做结构归纳。
+
+1. Case 1: `P` is `x1 == x2`.
+   `P` is an element of Gamma if and only if `x1` and `x2` are in the same equivalent class in `D`, which is equivalent to say that `x1` and `x2` has the same denotation in `J`.
+2. Case 2: `P` is `PRel x1 x2`.
+   It is obvious by `Rel`'s definition. 与之前的定义类似
+3. Case 3: `P` is PFalse.
+   On one hand, `PFalse` cannot be `Gamma`'s element since it is consistent. On the other hand, `PFalse` is not satisfied by any interpretation, including `J`.
+4. Case 4. `P` is `P1 IMPLY P2`.
+   语义方面，由语义定义，要么 `J` does not satisfy `P1` or `J` satisfies `P2`, 也即 `P1` is not an element of `Gamma` or `P2` is an element of `Gamma`. 
+   1. 若`P1`不在`Gamma`中，那么`Gamma`能推出`NOT P1`，但是`NOT P1`可以推出`P1 IMPLY P2`，在`Gamma`中了, 得证。
+   2. 类似的若`P2`在`Gamma`中，那么`Gamma`能推出`P1 IMPLY P2`，在`Gamma`中了, 得证。
+   反过来，语法层面，如果`P1 IMPLY P2`在`Gamma`中，是不是两种解释有一个成立？反证法：If `P1` is an element of `Gamma` and `P2` is not an element of `Gamma`, then `NOT P2` must be an element of `Gamma`. Thus, `NOT (P1 IMPLY P2)` is also an element of `Gamma` which means `P1 IMPLY P2` is not in `Gamma`.
+   This tells us that `P1 IMPLY P2` is in `Gamma` if and only if `P1` is not in `Gamma` or `P2` is in `Gamma`.
+5. Case 5. `P` is `FORALL x. P1`.
+   On one hand, suppose `FORALL x. P1` is an element `Gamma`. We know that for any variable `y`, `P1 [x ⟼ y]` will also be `Gamma`'s element. By induction hypothesis, `J` satisfies `P1 [x ⟼ y]` （Recall 语法替换与语义替换等价）. Thus, no matter what value in D is reassigned to the interpretation of x, the new interpration will satisfy `P1`. So, `J` satisfies `FORALL x. P1`.
+   On the other hand, suppose `FORALL x. P1` is not an element Gamma. 反证法 Then, `EXISTS x, NOT P1` will be an element of Gamma. According to the fact that Gamma is **witnessed**, there must exist a variable y such that `NOT P1 [x ⟼ y]` is in Gamma. Thus `P1 [x ⟼ y]` is not an element of `Gamma`. By induction hypothesis, `J` does not satisfy `P1 [x ⟼ y]` . So,
+       ( D, Rel, La [x ⟼ y*] ) |=/= P1
+   存在某一种解释中的替换，使得新的解释在`P1`不为真，那就是原来的解释上面，`FORALL x. P1`不为真，反证成功。which tells us that `J` does not satisfy `FORALL x. P1`.
+
+
+到此为止，我们证明了典范模型的性质：
+> Given `Gamma` which is witnessed and maximally consistent, we can construct an interpretation `J` satisfying all propositions in `Gamma`.
 
 ## Summary
 FOL's completeness (weak completeness) can be established by the follwoing steps.
