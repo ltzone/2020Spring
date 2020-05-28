@@ -11,13 +11,13 @@ INCLUDE_CURRENT = -R $(CURRENT_DIR) PL
 NORMAL_FLAG = $(INCLUDE_CURRENT)
 
 PL_FILES = \
-    Introduction.v Hoare_Logic_1.v Hoare_Logic_2.v 
+  Introduction.v Hoare_Logic_*.v Denotations_Semantics_*.v
 
 LIB_FILES = \
-	Imp.v
-
+	Imp.v ImpExt4.v Imp2.v Imp3.v ImpExt1.v ImpExt2.v ImpExt3.v  ImpExt5.v ImpExt6.v
+ 
 HW_FILES = \
-	Assignment1.v
+	Assignment*.v
 
 
 $(PL_FILES:%.v=%.vo): %.vo: %.v
