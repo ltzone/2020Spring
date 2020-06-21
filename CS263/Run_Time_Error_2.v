@@ -415,6 +415,31 @@ Fixpoint type_check (m: mexp): type_check_result :=
   end
 .
 
+Declare Scope mexp.
+Delimit Scope mexp with mexp.
+Local Open Scope mexp.
+
+Coercion MNum : Z >-> mexp.
+Coercion MId : var >-> mexp.
+Notation "x + y" := (MPlus x y) (at level 50, left associativity) : mexp.
+Notation "x - y" := (MMinus x y) (at level 50, left associativity) : mexp.
+Notation "x * y" := (MMult x y) (at level 40, left associativity) : mexp.
+Notation "x <= y" := (MLe x y) (at level 70, no associativity) : mexp.
+Notation "x == y" := (MEq x y) (at level 70, no associativity) : mexp.
+Notation "x && y" := (MAnd x y) (at level 40, left associativity) : mexp.
+Notation "'!' b" := (MNot b) (at level 39, right associativity) : mexp.
+Notation "[ x ; .. ; y ]" := (@cons mexp x .. (@cons mexp y (@nil mexp)) ..).
+
+Parameter P: var.
+Parameter X: var.
+Search nat.
+Goal clos_refl_trans (mstep (fun x:var =>
+    if eqb x P then 0
+    else if eqb x X then 1 else 2))
+    ((P == 0) && (X && (X + 1))) ( 1 && (X + 1)).
+
+
+
 (** That means, we can check whether an [mexp] expression is legal in
 compilation time. *)
 
