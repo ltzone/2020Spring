@@ -169,6 +169,15 @@ Proof.
 Qed.
 (** [] *)
 
+Lemma der: {{ False }} While (X == X) Do Skip EndWhile {{ False }}.
+Proof.
+  eapply hoare_consequence.
+  2: { eapply hoare_while with (P:=  (True)%assert).
+       eapply hoare_consequence. 2 :{ eapply hoare_skip. }
+       apply derives_refl. entailer. tauto. }
+  entailer. tauto.
+  entailer. tauto.
+Qed.
 (** **** Exercise: 2 stars, standard (der_after_loop)  *)
 Lemma der_after_loop: forall m: Z,
   {[RES]} = {[I]} * m AND {[X]} = m AND NOT {[! (I == X)]} |-- {[RES]} = m * m.
