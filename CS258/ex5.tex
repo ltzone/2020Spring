@@ -13,7 +13,7 @@
   \end{equation}
   ,which implies that there exists some prefix words in $D^{l_m}$ that are undecodable. Any arbitrary word that begins with such prefix will be unable to decode into sequence of codewords.
   \end{proof}
-  \label{ex1}
+  \label{ex5-1}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -39,7 +39,7 @@
   
   It follows that $\sum_{i=1}^{k} 2^{-l_i} \le \frac{1}{2}$. By removing $l_k$ we have $\sum_{i=1}^{k-1} 2^{-l_i} < \frac{1}{2}$. By the induction hypothesis, we know that for $l_1,\ldots,l_{k-1}$ lengths of codewords, they can form a set of fix-free codes. Furthermore, the strict less relation tells us that there still remains space for the codeword $l_k$. Hence, the conclusion follows.
   \end{proof}
-  \label{ex2}
+  \label{ex5-2}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -87,7 +87,7 @@
     Note $\delta \in (0,1)$, the right side has the minimal value of $\frac{3}{4}$ at $\delta = \frac{1}{4}$. Thus for any $ \sum_{i=1}^{m} 2^{-l_i} \le \frac{3}{4}$, the conclusion holds.
 
   \end{proof}
-  \label{ex3}
+  \label{ex5-3}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -101,19 +101,19 @@
       \caption{Huffman Code for $\left(\frac{1}{3}, \frac{1}{5}, \frac{1}{5}, \frac{2}{15}, \frac{2}{15}\right) .$}
       \centering
       \includegraphics[width=11cm]{img/5-1.png}
-      \label{fig:ex4}
+      \label{fig:ex5-4}
     \end{figure}
-    The huffman code of  $\left(\frac{1}{3}, \frac{1}{5}, \frac{1}{5}, \frac{2}{15}, \frac{2}{15}\right) .$ is found as Figure \ref{fig:ex4} shows. 
+    The huffman code of  $\left(\frac{1}{3}, \frac{1}{5}, \frac{1}{5}, \frac{2}{15}, \frac{2}{15}\right) .$ is found as Figure \ref{fig:ex5-4} shows. 
 
       \begin{figure}[H]
         \caption{Huffman Code for $\left(\frac{1}{5}, \frac{1}{5}, \frac{1}{5}, \frac{1}{5}, \frac{1}{5}\right)$}
         \centering
         \includegraphics[width=11cm]{img/5-2.png}
-        \label{fig:ex5}
+        \label{fig:ex5-5}
       \end{figure}
-    We see that for $\left(\frac{1}{5}, \frac{1}{5}, \frac{1}{5}, \frac{1}{5}, \frac{1}{5}\right)$, we can follow an identical process to construct the huffman code, as Figure \ref{fig:ex5} shows. Since huffman code is always optimal, the conclusion holds.
+    We see that for $\left(\frac{1}{5}, \frac{1}{5}, \frac{1}{5}, \frac{1}{5}, \frac{1}{5}\right)$, we can follow an identical process to construct the huffman code, as Figure \ref{fig:ex5-5} shows. Since huffman code is always optimal, the conclusion holds.
   \end{solution}
-  \label{ex4}
+  \label{ex5-4}
 \end{exercise}
 
 
@@ -142,7 +142,7 @@
     }
   \end{enumerate}
   \end{solution}
-  \label{ex5}
+  \label{ex5-5}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -182,7 +182,7 @@
     }
   \end{enumerate}
   \end{solution}
-  \label{ex6}
+  \label{ex5-6}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -240,7 +240,7 @@
     \end{equation}
     They are the same because the optimal code length is its entropy, which can be expressed with the notion of ``average'' entropy $\frac{1}{n} H(U_1,U_2,\ldots,U_n,\ldots)$, which approximates to $H(\mathcal{U})$.
   \end{solution}
-  \label{ex7}
+  \label{ex5-7}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -278,7 +278,7 @@
     }
   \end{enumerate}
   \end{solution}
-  \label{ex8}
+  \label{ex5-8}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -294,12 +294,12 @@
   }
   \begin{solution} The optimal code is given in Figure \ref{fig:ex9} by the Huffman rule. Note that in problem (2) we have that any probability is greater than the sum of the probabilities less than itself. Hence, we can construct the Huffman code in a monotonous order
   \end{solution}
-  \label{ex9}
+  \label{ex5-9}
 \end{exercise}
 
 \begin{figure}[htbp]
   \centering
-  \caption{Huffman Code for Exercise \ref{ex9}}
+  \caption{Huffman Code for Exercise \ref{ex5-9}}
       \begin{minipage}[t]{0.95\linewidth}
           \centering
           \includegraphics[width=11cm]{img/5-5.png}

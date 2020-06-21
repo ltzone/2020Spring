@@ -17,7 +17,7 @@
   \end{equation}
   ,which implies that $X \bot Y$.
 \end{proof}
-\label{ex1}
+\label{ex3-1}
 \end{exercise}
 
 
@@ -43,7 +43,7 @@
 %%%%%%%%%%%%%    EXERCISE 2   %%%%%%%%%%%%
 %%%%%%%%%%%%%                 %%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{exercise}[]{Prove that the implication in Exercise \ref{ex1} continues to be valid without the Markov Chain constraint}
+\begin{exercise}[]{Prove that the implication in Exercise \ref{ex3-1} continues to be valid without the Markov Chain constraint}
   \begin{proof}
     \begin{equation}
       \begin{array}{rll}
@@ -79,7 +79,7 @@
     \end{equation}
     On the other hand, $I(Y;Z|X,T) \ge 0$ can be proved by unfolding the definiton of conditional mutual information and the convexity property. Hence $I(Y;Z|X,T)$ must be zero. That is to say, $Y \bot Z|(X,T)$.
   \end{proof}
-  \label{ex3}
+  \label{ex3-3}
   \end{exercise}
 
   \begin{figure}[htbp]
@@ -94,7 +94,7 @@
             \centering
             \includegraphics[height=4cm]{img/3-4.png}
             \caption{Venn Diagram of Exercise 4}
-            \label{fig:ex4}
+            \label{fig:ex3-4}
         \end{minipage}
   \end{figure}
 
@@ -111,7 +111,7 @@
   \end{enumerate}
 }
   \begin{solution}
-    Inequality (1) and (3) always hold. We illustrate the answer through the venn diagram shown in Figure \ref{fig:ex4}, where area 1 $\sim$ 6 is respectively represented by $I(X;T),I(X;Z|T),I(Y;Z|(X,T)),I(Y;T|X),I(X;Y|Z),I(Z;T|Y)$.
+    Inequality (1) and (3) always hold. We illustrate the answer through the venn diagram shown in Figure \ref{fig:ex3-4}, where area 1 $\sim$ 6 is respectively represented by $I(X;T),I(X;Z|T),I(Y;Z|(X,T)),I(Y;T|X),I(X;Y|Z),I(Z;T|Y)$.
     \begin{enumerate}
       \item {
         The inequality can be rewritten in form of areas as
@@ -153,16 +153,16 @@
     With replacement, the previous result won't interfere with the present drawing. Hence we have $$H\left(X_{i} | X_{i-1}, \ldots, X_{1}\right)=H\left(X_{i}\right)$$. It follows that
     \begin{equation}
       H(X_1,X_2,...,X_k)  = \sum_{i=1}^{k}  H\left(X_{i} | X_{i-1}, \ldots, X_{1}\right) = \sum_{i=1}^{k}H\left(X_{i}\right) \quad \text{with replacement}
-      \label{ex5:replace}
+      \label{ex3-5:replace}
     \end{equation}
 
     Without replacement, we only have
     \begin{equation}
       H(X_1,X_2,...,X_k) = \sum_{i=1}^{k}  H\left(X_{i} | X_{i-1}, \ldots, X_{1}\right) \quad \text{without replacement}
-      \label{ex5:noreplace}
+      \label{ex3-5:noreplace}
     \end{equation}
 
-    Note that in Equation \ref{ex5:replace} and Equation \ref{ex5:noreplace}, all the single-variable entropies are of the same value. By condition-reduce-entropy theorem we know that
+    Note that in Equation \ref{ex3-5:replace} and Equation \ref{ex3-5:noreplace}, all the single-variable entropies are of the same value. By condition-reduce-entropy theorem we know that
     $$H\left(X_{i} | X_{i-1}, \ldots, X_{1}\right) \le H(X_i) \quad \text{for any } i $$
 
     Since the equality holds if and only if $X_i$ are mutually independent, which is not true in this problem, it follows that the entropy will be larger with replacement.

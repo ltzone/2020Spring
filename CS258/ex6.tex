@@ -20,7 +20,7 @@
     \end{aligned}\end{equation}
   The maximal value can be obtained when $X$ and $Y$ are uniformly distributed.
   \end{solution}
-  \label{ex1}
+  \label{ex6-1}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -53,7 +53,7 @@
       \end{equation}
       The maximal value can be obtained when $X$ is uniformly distributed.
   \end{solution}
-  \label{ex2}
+  \label{ex6-2}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -78,7 +78,7 @@
     \end{equation}
     Hence $C = C_1 +C_2$. The equality holds when $p(x_1,x_2) = p^{*}(x_1) p^{*}(x_2)$, where $p^{*}(x_1)$ and $p^{*}(x_2)$ are the optimal distribution corresponding to the original channel capacities.
   \end{solution}
-  \label{ex3}
+  \label{ex6-3}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -114,7 +114,7 @@ Find the capacity of the Z-channel and the maximizing input probability distribu
   \end{equation}
   It follows that the mutual information is at its maximum when $\pi = \frac{2}{5}$. The channel capacity is $C \approx 0.32193$.
   \end{solution}
-  \label{ex4}
+  \label{ex6-4}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -154,7 +154,7 @@ Find the capacity of the Z-channel and the maximizing input probability distribu
         C = H(\frac{1-\alpha}{2},\alpha,\frac{1-\alpha}{2}) - H(\alpha,\epsilon,1-\alpha-\epsilon)
       \end{equation}
   \end{solution}
-  \label{ex5}
+  \label{ex6-5}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -167,7 +167,7 @@ Find the capacity of the Z-channel and the maximizing input probability distribu
   \centering
   \includegraphics[height=3cm]{img/6-5.png}
   \caption{Discrete Memoryless Channel}
-  \label{fig:ex6}
+  \label{fig:ex6-6}
 \end{figure}
 where $\operatorname{Pr}\{Z=0\}=\operatorname{Pr}\{Z=a\}=\frac{1}{2} .$ The alphabet for $x$ is $\mathbf{X}=$ \{0,1\} . Assume that $Z$ is independent of $X .$ Observe that the channel capacity depends on the value of $a$. }
   \begin{solution}
@@ -202,7 +202,7 @@ where $\operatorname{Pr}\{Z=0\}=\operatorname{Pr}\{Z=a\}=\frac{1}{2} .$ The alph
     }
   \end{enumerate}
   \end{solution}
-  \label{ex6}
+  \label{ex6-6}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -246,7 +246,7 @@ where $\operatorname{Pr}\{Z=0\}=\operatorname{Pr}\{Z=a\}=\frac{1}{2} .$ The alph
     \end{equation}
     $C = \log \frac{11}{3}$. The maximal value is obtained when $p^{*}(x) = \frac{1}{11}$ for every $x \in \{0,1, \ldots, 10\}$
   \end{solution}
-  \label{ex7}
+  \label{ex6-7}
 \end{exercise}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -280,17 +280,17 @@ where $\operatorname{Pr}\{Z=0\}=\operatorname{Pr}\{Z=a\}=\frac{1}{2} .$ The alph
     \item {
       According to the hint, we try to build a 2-tuple code with the alphabet \{0,1,2,3,4\}. Note that for every input codeword $\left(X_1,X_2\right)$, there are four possibilities of output, namely $\left((X_1 \pm 1) \bmod 5 ,(X_1 \pm 1) \bmod 5\right)$, but the good news is that if we can ensure that there are no other input codewords (and their possible outputs) occupying the 4 entries, we can infer the input determintly.
       
-      Figure \ref{fig:ex8} gives an example of zero-error codes, where cells identified by different colors represent a codeword. The input codewords are (0,0),(1,2),(2,4),(3,1) and (4,3). Given an output codeword, its corresponding input codeword can be determined directly from the table.
+      Figure \ref{fig:ex6-8} gives an example of zero-error codes, where cells identified by different colors represent a codeword. The input codewords are (0,0),(1,2),(2,4),(3,1) and (4,3). Given an output codeword, its corresponding input codeword can be determined directly from the table.
       \begin{figure}[H]
         \centering
         \includegraphics[]{img/6-6.png}
         \caption{A Construction of Zero-Error Codes}
-        \label{fig:ex8}
+        \label{fig:ex6-8}
       \end{figure}
 
       With the codes above, we can find that the number of bits per channel use is $\frac{1}{2} \log{5} > 1$.
     }
   \end{enumerate}
   \end{solution}
-  \label{ex8}
+  \label{ex6-8}
 \end{exercise}

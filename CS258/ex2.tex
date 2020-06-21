@@ -16,7 +16,7 @@ Since we have $\sum p(x) = 1$, we know that $$\frac{q(x_1)}{p(x_1)} = \frac{q(x_
 By the second condition we know that $\sum q(x) = \sum p(x) = 1$. Hence $p(x) = q(x)$ for all $x\in \mathcal{X}$.
 
 \end{proof}
-\label{ex1}
+\label{ex2-1}
 \end{exercise}
 
 
@@ -35,7 +35,7 @@ The equality holds if and only if $$\frac{p(x,y)}{p(x)p(y)}=k, \text{ for every 
 Since $\sum p(x,y) = 1$, we know that $k=1$. That is to say, $p(x,y) = p(x)p(y)$ for every possible $x,y$. $X$ and $Y$ are independent.
 
 \end{proof}
-\label{ex2}
+\label{ex2-2}
 \end{exercise}
 
 
@@ -84,7 +84,7 @@ Since $\sum p(x,y|z) = 1$, we know that $k=1$. That is to say, $p(x,y|z) = p(x|z
   $$0\le D(p\| u)= \log |\mathcal{X}|-H(X)$$}
 \begin{proof}
   
-  From Exercise \ref{ex1} we know $D(p\| u)\ge 0$. By definition of mutual entropy we have
+  From Exercise \ref{ex2-1} we know $D(p\| u)\ge 0$. By definition of mutual entropy we have
 
   \begin{equation}
     \begin{aligned}
@@ -99,7 +99,7 @@ Since $\sum p(x,y|z) = 1$, we know that $k=1$. That is to say, $p(x,y|z) = p(x|z
   with equality if and only if $X$ and $Y$ are independent. }
 \begin{proof}
 \par{~}
-We know that $I(X;Y) = H(X) - H(X|Y)$. From Exercise \ref{ex2} we know that $I(X;Y) \ge 0$. It follows that $H(X|Y) \le H(X)$ with equality if and only if $X$ and $Y$ are independent.
+We know that $I(X;Y) = H(X) - H(X|Y)$. From Exercise \ref{ex2-2} we know that $I(X;Y) \ge 0$. It follows that $H(X|Y) \le H(X)$ with equality if and only if $X$ and $Y$ are independent.
 \end{proof}
 \end{exercise}
   
