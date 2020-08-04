@@ -1,8 +1,12 @@
+// idea: merge-sort
+// an easier solution: 
+// for i in A.size(): if (abs(A[i] - i) > 1) return false;
+
 class Solution {
 public:
     bool isIdealPermutation(vector<int>& A) {
         int loc = countLocalInversion(A);
-        int glb = globalSortAndInversion(A,0,A.size());
+        int glb = globalSortAndInversion(A,0,A.size()-1);
         cout << loc << endl;
         cout << glb << endl;
         for (int i=0;i<A.size();++i)
@@ -22,11 +26,8 @@ public:
     
     int globalSortAndInversion(vector<int>& A, int beginPos, int endPos){
         
-        if (beginPos == endPos)
+        if (endPos - beginPos <= 0)
             return 0;
-        if (beginPos == endPos - 1)
-            return 0;
-        
         
         int midPos = (beginPos + endPos)/2;
         int leftGlobalInversion = globalSortAndInversion(A,beginPos,midPos);
