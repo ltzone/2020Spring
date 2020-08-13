@@ -1,6 +1,6 @@
 # 2020 Spring
 
-Course Materials, My Notes and Codes in 2020 Spring
+Course Materials, My Notes and Codes in 2020 Spring (SJTU-2018 IEEE CLASS)
 
 - EI333 软件工程，课程笔记，小组项目及相关文档见[SJTU-Go](https://github.com/SJTU-Go)
 - CS263 程序语言，课堂笔记，平时作业（Coq代码），大作业见[Lambda-Formal](https://github.com/ltzone/lambda_formal)
