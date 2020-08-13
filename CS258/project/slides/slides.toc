@@ -1,0 +1,14 @@
+\beamer@sectionintoc {1}{Background}{2}{0}{1}
+\beamer@sectionintoc {2}{I-Measure}{3}{0}{2}
+\beamer@subsectionintoc {2}{1}{Definition}{3}{0}{2}
+\beamer@subsectionintoc {2}{2}{Measure Theorem}{4}{0}{2}
+\beamer@subsectionintoc {2}{3}{Correspondence}{5}{0}{2}
+\beamer@subsectionintoc {2}{4}{Applications}{6}{0}{2}
+\beamer@sectionintoc {3}{Partial Information}{8}{0}{3}
+\beamer@subsectionintoc {3}{1}{Redundancy Measure}{8}{0}{3}
+\beamer@subsectionintoc {3}{2}{Relations between Redundancy Measures}{9}{0}{3}
+\beamer@subsectionintoc {3}{3}{Partial Information Decomposition}{10}{0}{3}
+\beamer@sectionintoc {4}{PI Measure}{11}{0}{4}
+\beamer@subsectionintoc {4}{1}{Formulation}{11}{0}{4}
+\beamer@subsectionintoc {4}{2}{Simplification}{13}{0}{4}
+\beamer@subsectionintoc {4}{3}{Application}{17}{0}{4}

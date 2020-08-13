@@ -1,0 +1,138 @@
+\documentclass[xcolor=dvipsnames]{beamer}
+
+\mode<presentation>
+% these codes for chinese characters input, if you meet problems with these codes, you can feel free to comment them, or you can try to change your build method to "xelatex"
+% \documentclass[xcolor=dvipsnames]{beamer}
+% \usepackage{xeCJK}
+\usepackage{verbatim}
+\usepackage{subfigure} 
+\RequirePackage{color}
+% For convenience, some of the topics are listed here for users to use.
+
+% \usetheme{AnnArbor}
+%\usetheme{Antibes}
+%\usetheme{Bergen}
+% \usetheme{Berkeley}
+%\usetheme{Berlin}
+%\usetheme{Boadilla}
+% \usetheme{boxes}
+% \usetheme{CambridgeUS}
+%\usetheme{Copenhagen}
+%\usetheme{Darmstadt}
+% \usetheme{default}
+%\usetheme{Frankfurt}
+%\usetheme{Goettingen}
+%\usetheme{Hannover}
+% \usetheme{Ilmenau}
+% \usetheme{JuanLesPins}
+%  \usetheme{Luebeck}
+ \usetheme{Madrid}
+% \usetheme{Malmoe}
+%\usetheme{Marburg}
+% \usetheme{Montpellier}
+% \usetheme{PaloAlto}
+% \usetheme{Pittsburgh}
+% \usetheme{Rochester}
+% \usetheme{Singapore}
+% \usetheme{Szeged}
+% \usetheme{Warsaw}
+
+\definecolor{sjtu-red}{RGB}{184,45,40} 
+\definecolor{sjtu-white}{RGB}{255,255,255}
+\definecolor{sjtu-blue}{RGB}{21,65,146}
+\definecolor{sjtu-black}{RGB}{0,0,0}
+
+% Uncomment the following code to get the color gradient on the slide (Decaying from sjtu-red to sjtu-white).
+
+
+% \useoutertheme{shadow}
+% \usepackage{tikz}
+% \usetikzlibrary{shadings}
+% \colorlet{titleleft}{sjtu-red}
+% \colorlet{titleright}{sjtu-red!45!sjtu-white}
+% \makeatletter
+% \pgfdeclarehorizontalshading[titleleft,titleright]{beamer@frametitleshade}{\paperheight}{%
+%   color(0pt)=(titleleft);
+%   color(\paperwidth)=(titleright)}
+% \makeatother
+
+% End of gradient slide title effect.
+
+\setbeamercolor{section in head/foot}{bg=sjtu-blue, fg=sjtu-white}
+\setbeamercolor{subsection in head/foot}{bg=sjtu-blue, fg=sjtu-white}
+\setbeamercolor{frametitle}{bg=sjtu-blue, fg=sjtu-white}
+\setbeamercolor{title}{bg=sjtu-blue, fg=sjtu-white}
+\setbeamercolor{alerted text}{fg=sjtu-blue}
+\setbeamercolor{block title}{fg=sjtu-white}
+\setbeamercolor{block body}{fg=sjtu-black}
+
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{propositions}[numbered]
+
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true, shadow=true]
+
+\title[PI Measure]{PI Measure: A Set-Theoretic View of Partial Information}
+
+\subtitle{2020 Spring CS258 Group Project Presentation}
+
+% You can uncommit one of this code block to change
+% from one-author's mode to muli-author's mode which is 
+% displayed in the title page.
+% \author{Authors' name}
+% \institute[Shanghai Jiao Tong University] % (optional, but mostly needed)
+% {
+%   School of Electronic Information and Electrical Engineering\\
+%   Shanghai Jiao Tong University
+% }
+
+\author[L. Zhou, H. Yang, S. Dong] {Litao Zhou, Hongbo Yang, Shiwen Dong}
+
+\institute[SJTU-IEEE] % (optional)
+{
+  IEEE Class F1803016 \\
+  School of Electronic Information and Electrical Engineering\\
+  Shanghai Jiao Tong University
+}
+
+\titlegraphic{
+  % Uncomment the other code line below to change the logo from English version to Chinese.  
+   % \includegraphics[width=4.4cm]{sjtu-logo}
+   \includegraphics[width=4cm]{img/sjtu-logo-en.png}
+}
+
+\date{\today}
+
+% Uncomment this, if you want the table of contents to pop up at the beginning of each subsection:
+
+% End of the table-content part
+% \AtBeginSection[]
+% {
+%   \begin{frame}{Outline}
+%       \tableofcontents[currentsection,currentsubsection,hideothersubsections]
+%   \end{frame}
+% }
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\logo{\includegraphics[height=1cm]{img/sjtu.png}}
+
+% \begin{frame}{Outline}
+%   \tableofcontents[hideallsubsections]
+% \end{frame}
+
+\input{parts/background}
+
+\input{parts/Imeasure}
+
+\input{parts/decomposition}
+
+\input{parts/pimeasure}
+
+\input{parts/others}
+
+\end{document}

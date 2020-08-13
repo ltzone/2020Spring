@@ -1,0 +1,289 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{shannon1948mathematical}{article}{}
+      \name{author}{1}{}{%
+        {{hash=536c91678d1dde76c9acd47047556291}{%
+           family={Shannon},
+           familyi={S\bibinitperiod},
+           given={Claude\bibnamedelima E},
+           giveni={C\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Wiley Online Library}%
+      }
+      \strng{namehash}{536c91678d1dde76c9acd47047556291}
+      \strng{fullhash}{536c91678d1dde76c9acd47047556291}
+      \strng{bibnamehash}{536c91678d1dde76c9acd47047556291}
+      \strng{authorbibnamehash}{536c91678d1dde76c9acd47047556291}
+      \strng{authornamehash}{536c91678d1dde76c9acd47047556291}
+      \strng{authorfullhash}{536c91678d1dde76c9acd47047556291}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Bell system technical journal}
+      \field{number}{3}
+      \field{title}{A mathematical theory of communication}
+      \field{volume}{27}
+      \field{year}{1948}
+      \field{pages}{379\bibrangedash 423}
+      \range{pages}{45}
+    \endentry
+    \entry{yeung2008information}{book}{}
+      \name{author}{1}{}{%
+        {{hash=6d6efd9b22a5df9f0c34c7b326b7e790}{%
+           family={Yeung},
+           familyi={Y\bibinitperiod},
+           given={Raymond\bibnamedelima W},
+           giveni={R\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Science \& Business Media}%
+      }
+      \strng{namehash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{fullhash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{bibnamehash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{authorbibnamehash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{authornamehash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{authorfullhash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Information theory and network coding}
+      \field{year}{2008}
+    \endentry
+    \entry{yeung2012first}{book}{}
+      \name{author}{1}{}{%
+        {{hash=6d6efd9b22a5df9f0c34c7b326b7e790}{%
+           family={Yeung},
+           familyi={Y\bibinitperiod},
+           given={Raymond\bibnamedelima W},
+           giveni={R\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Science \& Business Media}%
+      }
+      \strng{namehash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{fullhash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{bibnamehash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{authorbibnamehash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{authornamehash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \strng{authorfullhash}{6d6efd9b22a5df9f0c34c7b326b7e790}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{A first course in information theory}
+      \field{year}{2012}
+    \endentry
+    \entry{belyaev1959many}{book}{}
+      \true{moreauthor}
+      \true{morelabelname}
+      \name{author}{10}{}{%
+        {{hash=085bc4f71cffd622a4ccb7565f3d4732}{%
+           family={Belyaev},
+           familyi={B\bibinitperiod},
+           given={Spartak\bibnamedelima T},
+           giveni={S\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=c52aaa3dbe6e81908c40a2e223e529b7}{%
+           family={Bloch},
+           familyi={B\bibinitperiod},
+           given={Claude},
+           giveni={C\bibinitperiod}}}%
+        {{hash=f9ef65b246ff9ae37555f758f986fe69}{%
+           family={Bohm},
+           familyi={B\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=a83d71edc5ea364e1c4c61fbef00ec8a}{%
+           family={Brueckner},
+           familyi={B\bibinitperiod},
+           given={Keith\bibnamedelima A},
+           giveni={K\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=05ca7de867ce424e03c030e125cc004d}{%
+           family={Dominicis},
+           familyi={D\bibinitperiod},
+           given={Cirano},
+           giveni={C\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=62f547896fdd964afa696ab3f717dfa8}{%
+           family={Huang},
+           familyi={H\bibinitperiod},
+           given={Kerson},
+           giveni={K\bibinitperiod}}}%
+        {{hash=db7aa2e216ce4c1c26f68dfae512af03}{%
+           family={Hugenholtz},
+           familyi={H\bibinitperiod},
+           given={Nicolaas\bibnamedelima Marinus},
+           giveni={N\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=987ce9c43e27470ab7b3b3d06c38808f}{%
+           family={Lipkin},
+           familyi={L\bibinitperiod},
+           given={Harry\bibnamedelima J},
+           giveni={H\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=3d018e0202c20cdfd3c9e6b79ef04c81}{%
+           family={Lynton},
+           familyi={L\bibinitperiod},
+           given={Ernest\bibnamedelima Albert},
+           giveni={E\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=9f8f1cd67618efedd5080667257d3a47}{%
+           family={Mottelson},
+           familyi={M\bibinitperiod},
+           given={Ben\bibnamedelima Roy},
+           giveni={B\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{2028377a61cea904d49bb6df47c2f128}
+      \strng{fullhash}{2eacff8acaf394c739fa8c9dda5f7b74}
+      \strng{bibnamehash}{2028377a61cea904d49bb6df47c2f128}
+      \strng{authorbibnamehash}{2028377a61cea904d49bb6df47c2f128}
+      \strng{authornamehash}{2028377a61cea904d49bb6df47c2f128}
+      \strng{authorfullhash}{2eacff8acaf394c739fa8c9dda5f7b74}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Many Body Problem}
+      \field{year}{1959}
+    \endentry
+    \entry{Dayan2001Theoretical}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e7766b0c9f7b334a65400b7c120c91ce}{%
+           family={Dayan},
+           familyi={D\bibinitperiod},
+           given={P.},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e59367c7f0053ea873bc36f74ab7b67e}{%
+           family={Abbott},
+           familyi={A\bibinitperiod},
+           given={L\bibnamedelima F},
+           giveni={L\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+      }
+      \strng{namehash}{ab3f10607829a167a88a546cbd865486}
+      \strng{fullhash}{ab3f10607829a167a88a546cbd865486}
+      \strng{bibnamehash}{ab3f10607829a167a88a546cbd865486}
+      \strng{authorbibnamehash}{ab3f10607829a167a88a546cbd865486}
+      \strng{authornamehash}{ab3f10607829a167a88a546cbd865486}
+      \strng{authorfullhash}{ab3f10607829a167a88a546cbd865486}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Theoretical neuroscience provides a quantitative basis for describing what nervous systems do, determining how they function, and uncovering the general principles by which they operate. This text introduces the basic mathematical and computational methods of theoretical neuroscience and presents applications in a variety of areas including vision, sensory-motor integration, development, learning, and memory.}
+      \field{title}{Theoretical Neuroscience: Computational and Mathematical Modeling of Neural Systems}
+      \field{year}{2001}
+      \keyw{arteriovenous malformation;dura;surgery}
+    \endentry
+    \entry{Rieke1996Spikes}{article}{}
+      \name{author}{4}{}{%
+        {{hash=d3d43b43f2fa17298da018a358c0216a}{%
+           family={Rieke},
+           familyi={R\bibinitperiod},
+           given={Fred},
+           giveni={F\bibinitperiod}}}%
+        {{hash=462e3785a60766e1b4c336bd3926fddf}{%
+           family={Warland},
+           familyi={W\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=695a58bfd185dd0dbb3ce902aacfa444}{%
+           family={Steveninck},
+           familyi={S\bibinitperiod},
+           given={Rob\bibnamedelima Ruyter},
+           giveni={R\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=10a2fcf9b4d2afe92cf7da76b25fc462}{%
+           family={Bialek},
+           familyi={B\bibinitperiod},
+           given={William},
+           giveni={W\bibinitperiod}}}%
+      }
+      \strng{namehash}{f7d00032d89e3487618cc61c622db2be}
+      \strng{fullhash}{3d59576b9fd382b4622c5b6d9c5fe529}
+      \strng{bibnamehash}{f7d00032d89e3487618cc61c622db2be}
+      \strng{authorbibnamehash}{f7d00032d89e3487618cc61c622db2be}
+      \strng{authornamehash}{f7d00032d89e3487618cc61c622db2be}
+      \strng{authorfullhash}{3d59576b9fd382b4622c5b6d9c5fe529}
+      \field{sortinit}{4}
+      \field{sortinithash}{11cdaee3b18e01d77f3f428b13c1fc76}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Spikes : exploring the neural code Fred Rieke ... [et al.] (Computational neuroscience) MIT Press, 1999 paperback ed.}
+      \field{title}{Spikes, Exploring the Neural Code}
+      \field{year}{1996}
+    \endentry
+    \entry{Williams2010Nonnegative}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f36ca66e0fbc9b169289d90dcb5a2ddc}{%
+           family={Williams},
+           familyi={W\bibinitperiod},
+           given={Paul\bibnamedelima L.},
+           giveni={P\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=0dec8653c302107837212e06ab20dc92}{%
+           family={Beer},
+           familyi={B\bibinitperiod},
+           given={Randall\bibnamedelima D.},
+           giveni={R\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{0bc8a936cd496deb1a4c2d41cfb28172}
+      \strng{fullhash}{0bc8a936cd496deb1a4c2d41cfb28172}
+      \strng{bibnamehash}{0bc8a936cd496deb1a4c2d41cfb28172}
+      \strng{authorbibnamehash}{0bc8a936cd496deb1a4c2d41cfb28172}
+      \strng{authornamehash}{0bc8a936cd496deb1a4c2d41cfb28172}
+      \strng{authorfullhash}{0bc8a936cd496deb1a4c2d41cfb28172}
+      \field{sortinit}{5}
+      \field{sortinithash}{3c19c3776b658b3558e9e2e4840c01e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Of the various attempts to generalize information theory to multiple variables, the most widely utilized, interaction information, suffers from the problem that it is sometimes negative. Here we reconsider from first principles the general structure of the information that a set of sources provides about a given variable. We begin with a new definition of redundancy as the minimum information that any source provides about each possible outcome of the variable, averaged over all possible outcomes. We then show how this measure of redundancy induces a lattice over sets of sources that clarifies the general structure of multivariate information. Finally, we use this redundancy lattice to propose a definition of partial information atoms that exhaustively decompose the Shannon information in a multivariate system in terms of the redundancy between synergies of subsets of the sources. Unlike interaction information, the atoms of our partial information decomposition are never negative and always support a clear interpretation as informational quantities. Our analysis also demonstrates how the negativity of interaction information can be explained by its confounding of redundancy and synergy.}
+      \field{title}{Nonnegative Decomposition of Multivariate Information}
+      \field{year}{2010}
+      \keyw{Computer Science - Information Theory;Mathematical Physics;Physics - Biological Physics;Physics - Data Analysis;Statistics and Probability;Quantitative Biology - Neurons and Cognition;Quantitative Biology - Quantitative Methods;94A15}
+    \endentry
+    \entry{stanley1997enumerative}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7c92cd323294dc4001201c461211c3d8}{%
+           family={Stanley},
+           familyi={S\bibinitperiod},
+           given={RP},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{7c92cd323294dc4001201c461211c3d8}
+      \strng{fullhash}{7c92cd323294dc4001201c461211c3d8}
+      \strng{bibnamehash}{7c92cd323294dc4001201c461211c3d8}
+      \strng{authorbibnamehash}{7c92cd323294dc4001201c461211c3d8}
+      \strng{authornamehash}{7c92cd323294dc4001201c461211c3d8}
+      \strng{authorfullhash}{7c92cd323294dc4001201c461211c3d8}
+      \field{sortinit}{6}
+      \field{sortinithash}{57e57fb8451e7fcfa45d1e069f6d3136}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{England zbMATH}
+      \field{title}{Enumerative combinatorics, vol. 1 Cambridge University Press Cambridge}
+      \field{year}{1997}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

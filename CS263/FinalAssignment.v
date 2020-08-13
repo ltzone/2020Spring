@@ -426,7 +426,7 @@ Definition my_choice2: Z := 1.
 (* c1 and c2 are in two distinct branches.                           *)
 (* The second statement is true                                      *)
 (* because stepping to the (c1,st) state means (beval b1 st) and     *)
-(* (beval b2 st) hold in both programs. Since beval steps preserve   *)
+(* (beval b2 st) hold in both programs. Since if_sem steps preserve  *)
 (* the denotation and have no side effects, both programs can step   *)
 (* to (c1,st).                                                       *)
 (* ***************************************************************** *)
